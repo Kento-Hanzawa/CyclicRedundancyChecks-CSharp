@@ -1,0 +1,2 @@
+# CyclicRedundancyChecks
+CyclicRedundancyChecks for .NET
