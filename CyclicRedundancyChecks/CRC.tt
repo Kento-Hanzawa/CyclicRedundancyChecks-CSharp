@@ -1,0 +1,136 @@
+﻿<#@ template  debug="true" hostSpecific="true" #>
+<#@ output extension=".tt.cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #> 
+<#
+    var CRCTypePair = new Dictionary<string, Type>
+    {
+        { "CRC8" , typeof(byte) },
+        { "CRC16", typeof(ushort) },
+        { "CRC32", typeof(uint) },
+        { "CRC64", typeof(ulong) },
+    };	
+#>
+using System;
+
+namespace CyclicRedundancyChecks
+{
+<# foreach (var pair in CRCTypePair) { #>
+    public sealed partial class <#= pair.Key #> : CRC
+    {
+        private const int SizeAsByte = sizeof(global::<#= pair.Value.Namespace #>.<#= pair.Value.Name #>);
+        private const int SizeAsBit = SizeAsByte * 8;
+
+        private global::<#= pair.Value.Namespace #>.<#= pair.Value.Name #> result;
+        private readonly global::<#= pair.Value.Namespace #>.<#= pair.Value.Name #>[] lookupTableBuffer;
+
+        public global::<#= pair.Value.Namespace #>.<#= pair.Value.Name #> Polynomial { get; }
+        public global::<#= pair.Value.Namespace #>.<#= pair.Value.Name #> InitialValue { get; }
+        public global::<#= pair.Value.Namespace #>.<#= pair.Value.Name #> FinalXorValue { get; }
+        public bool ReversedData { get; }
+        public bool ReversedOut { get; }
+        public ReadOnlySpan<global::<#= pair.Value.Namespace #>.<#= pair.Value.Name #>> LookupTable { get { return lookupTableBuffer.AsSpan(0, TableSize); } }
+
+        public <#= pair.Key #>(global::<#= pair.Value.Namespace #>.<#= pair.Value.Name #> polynomial, global::<#= pair.Value.Namespace #>.<#= pair.Value.Name #> initialValue, global::<#= pair.Value.Namespace #>.<#= pair.Value.Name #> finalXorValue, bool reversedData, bool reversedOut)
+        {
+            this.HashSizeValue = SizeAsBit;
+            this.Polynomial = polynomial;
+            this.InitialValue = initialValue;
+            this.FinalXorValue = finalXorValue;
+            this.ReversedData = reversedData;
+            this.ReversedOut = reversedOut;
+            this.result = InitialValue;
+            lookupTableBuffer = System.Buffers.ArrayPool<global::<#= pair.Value.Namespace #>.<#= pair.Value.Name #>>.Shared.Rent(TableSize);
+            CRCUtility.TableFill(lookupTableBuffer.AsSpan(0, TableSize), Polynomial, reversedData);
+        }
+
+        public override void Initialize()
+        {
+            result = InitialValue;
+        }
+
+        protected override void HashCore(byte[] array, int ibStart, int cbSize)
+        {
+            HashCore(array.AsSpan(ibStart, cbSize));
+        }
+
+        protected override void HashCore(ReadOnlySpan<byte> source)
+        {
+            for (var i = 0; i < source.Length; i++)
+            {
+                if (ReversedData)
+                {
+                    var tableIndex = (int)((result & 0xFF) ^ source[i]);
+                    result = (global::<#= pair.Value.Namespace #>.<#= pair.Value.Name #>)((result >> 8) ^ LookupTable[tableIndex]);
+                }
+                else
+                {
+                    var tableIndex = (int)(((result >> (SizeAsBit - 8)) & 0xFF) ^ source[i]);
+                    result = (global::<#= pair.Value.Namespace #>.<#= pair.Value.Name #>)((result << 8) ^ LookupTable[tableIndex]);
+                }
+            }
+        }
+
+        protected override byte[] HashFinal()
+        {
+            Span<byte> span = stackalloc byte[SizeAsByte];
+            TryHashFinal(span, out _);
+            return span.ToArray();
+        }
+
+        protected override bool TryHashFinal(Span<byte> destination, out int bytesWritten)
+        {
+            if (destination.Length < SizeAsByte)
+            {
+                bytesWritten = 0;
+                return false;
+            }
+
+            // 参考にしたコードでこういった記述があるが、
+            // この条件が true になることはなさそうです。
+            if ((sizeof(global::<#= pair.Value.Namespace #>.<#= pair.Value.Name #>) * 8) > SizeAsBit)
+            {
+                result = (global::<#= pair.Value.Namespace #>.<#= pair.Value.Name #>)(result & ((global::<#= pair.Value.Namespace #>.<#= pair.Value.Name #>)1 << SizeAsBit) - 1);
+            }
+
+            if (ReversedOut)
+                result = (global::<#= pair.Value.Namespace #>.<#= pair.Value.Name #>)(~result ^ FinalXorValue);
+            else
+                result = (global::<#= pair.Value.Namespace #>.<#= pair.Value.Name #>)(result ^ FinalXorValue);
+
+            var shift = SizeAsBit - 8;
+            for (var i = 0; i < SizeAsByte; i++)
+            {
+                destination[i] = (byte)(result >> shift);
+                shift -= 8;
+            }
+            bytesWritten = SizeAsByte;
+            return true;
+        }
+
+        #region IDisposable
+        private bool disposedValue = false;
+        protected override void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    if (lookupTableBuffer != null)
+                        System.Buffers.ArrayPool<global::<#= pair.Value.Namespace #>.<#= pair.Value.Name #>>.Shared.Return(lookupTableBuffer);
+                }
+                disposedValue = true;
+            }
+            base.Dispose(disposing);
+        }
+        #endregion
+    }
+
+<# } #>
+}

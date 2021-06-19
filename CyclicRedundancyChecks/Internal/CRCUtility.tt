@@ -1,0 +1,96 @@
+﻿<#@ template  debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #> 
+<#
+    var infos = new (string CRCName, Type CRCType, int ByteSize, int BitSize)[]
+    {
+        ( "CRC8"  , typeof(byte)  , sizeof(byte)  , sizeof(byte)   * 8 ),
+        ( "CRC16" , typeof(ushort), sizeof(ushort), sizeof(ushort) * 8 ),
+        ( "CRC32" , typeof(uint)  , sizeof(uint)  , sizeof(uint)   * 8 ),
+        ( "CRC64" , typeof(ulong) , sizeof(ulong) , sizeof(ulong)  * 8 ),
+    };
+#>
+using System;
+
+namespace CyclicRedundancyChecks
+{
+    internal static partial class CRCUtility
+    {
+#pragma warning disable CS0675 // 符号拡張されたオペランドでビットごとの or 演算子が使用されました
+<# foreach (var info in infos) { #>
+        /// <summary>
+        /// <see cref="global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #>"/> のビット順序を反転させます。
+        /// </summary>
+        /// <param name="value">反転処理の対象となる値。</param>
+        /// <returns><paramref name="value"/> のビット順が反転された値。</returns>
+        public static global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #> BitReverse(global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #> value)
+        {
+            const int BitSize = <#= info.BitSize #>; // sizeof(global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #>) * 8
+
+            global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #> result = 0;
+            for (int i = 0; i < BitSize; i++)
+            {
+                if ((value & 1) == 1)
+                {
+                    result |= (global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #>)((global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #>)1 << (BitSize - 1 - i));
+                }
+                value = (global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #>)(value >> 1);
+            }
+            return result;
+        }
+
+<# } #>
+#pragma warning restore CS0675 // 符号拡張されたオペランドでビットごとの or 演算子が使用されました
+
+
+<# foreach (var info in infos) { #>
+        /// <summary>
+        /// CRC計算用の LookupTable 値を <paramref name="table"/> に格納します。
+        /// </summary>
+        /// <param name="table">LookupTable の値を格納するシーケンス。</param>
+        /// <param name="polynomial">生成多項式。</param>
+        /// <param name="reversedData">反転を行う場合は <see langword="true"/>。しない場合は <see langword="false"/>。</param>
+        public static void TableFill(Span<global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #>> table, global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #> polynomial, bool reversedData)
+        {
+            for (int i = 0; i < table.Length; i++)
+            {
+                table[i] = Obtener((byte)(i & 0xFF));
+            }
+
+            global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #> Obtener(byte position)
+            {
+                const int BitSize = <#= info.BitSize #>; // sizeof(global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #>) * 8;
+                const global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #> TopBit = <#= "0x" + ((ulong)1 << (info.BitSize - 1)).ToString("X") #>; // (global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #>)1 << (BitSize - 1);
+
+                global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #> result;
+                if (reversedData)
+                    result = (global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #>)((global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #>)(BitReverse(position) & 0xFF) << (BitSize - 8));
+                else
+                    result = (global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #>)((global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #>)            position          << (BitSize - 8));
+
+                for (var i = 0; i < 8; i++)
+                {
+                    if ((result & TopBit) == 0)
+                        result = (global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #>)(result << 1);
+                    else
+                        result = (global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #>)((result << 1) ^ polynomial);
+                }
+
+                if (reversedData)
+                    return BitReverse(result);
+                else
+                    return result;
+            }
+        }
+
+<# } #>
+
+    }
+}

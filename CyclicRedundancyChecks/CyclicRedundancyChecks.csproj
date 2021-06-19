@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Internal\CRCUtility.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CRCUtility.tt</DependentUpon>
+    </Compile>
+    <Compile Update="CRC.tt.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CRC.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Internal\CRCUtility.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CRCUtility.cs</LastGenOutput>
+    </None>
+    <None Update="CRC.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CRC.tt.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+</Project>
