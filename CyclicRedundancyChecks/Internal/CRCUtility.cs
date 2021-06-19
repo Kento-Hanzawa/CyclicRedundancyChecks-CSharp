@@ -9,7 +9,7 @@ using System;
 
 namespace CyclicRedundancyChecks
 {
-    internal static partial class CRCUtility
+    internal static class CRCUtility
     {
 #pragma warning disable CS0675 // 符号拡張されたオペランドでビットごとの or 演算子が使用されました
         /// <summary>

@@ -19,25 +19,33 @@ namespace CyclicRedundancyChecks
     public abstract partial class CRC : System.Security.Cryptography.HashAlgorithm
     {
         protected const int TableSize = 256;
+        private static bool isRegistered = false;
 
+        /// <summary>
+        /// CRC の実装を <see cref="System.Security.Cryptography.CryptoConfig.AddAlgorithm(Type, string[])"/> を使用して登録します。
+        /// </summary>
         public static void RegisterAlgorithm()
         {
+            if (isRegistered) return;
+
             // CRC8
 <# foreach (var info in CRC8Infos) { #>
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.<#= info.ClassName #>), "<#= info.CRCName #>");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.<#= info.ClassName #>), <#= string.Join(", ", info.RegisterNames.Select(x => '"' + x + '"')) #>);
 <# } #>
             // CRC16
 <# foreach (var info in CRC16Infos) { #>
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.<#= info.ClassName #>), "<#= info.CRCName #>");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.<#= info.ClassName #>), <#= string.Join(", ", info.RegisterNames.Select(x => '"' + x + '"')) #>);
 <# } #>
             // CRC32
 <# foreach (var info in CRC32Infos) { #>
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.<#= info.ClassName #>), "<#= info.CRCName #>");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.<#= info.ClassName #>), <#= string.Join(", ", info.RegisterNames.Select(x => '"' + x + '"')) #>);
 <# } #>
             // CRC64
 <# foreach (var info in CRC64Infos) { #>
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.<#= info.ClassName #>), "<#= info.CRCName #>");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.<#= info.ClassName #>), <#= string.Join(", ", info.RegisterNames.Select(x => '"' + x + '"')) #>);
 <# } #>
+
+            isRegistered = true;
         }
     }
 
@@ -45,12 +53,12 @@ namespace CyclicRedundancyChecks
     /// <summary>
     /// 入力データの <see cref="CyclicRedundancyChecks.<#= info.CRCName #>"/> ハッシュを計算します。
     /// </summary>
-    public class <#= info.CRCName #> : CRC
+    public partial class <#= info.CRCName #> : CRC
     {
         private const int ByteSize = sizeof(global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #>);
         private const int BitSize = ByteSize * 8;
 
-        public global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #> result;
+        private global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #> result;
         private readonly global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #>[] lookupTableBuffer;
 
         public global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #> Polynomial { get; }
@@ -135,6 +143,38 @@ namespace CyclicRedundancyChecks
 <# } #>
             bytesWritten = ByteSize;
             return true;
+        }
+
+        /// <summary>
+        /// バイトシーケンスから CRC の値へ変換します。
+        /// </summary>
+        /// <remarks><see cref="System.Security.Cryptography.HashAlgorithm.ComputeHash(byte[])"/> などから受け取ったバイト配列を CRC 値へ変換する際などに使用します。</remarks>
+        /// <param name="hash">変換を行うバイトシーケンス。</param>
+        /// <exception cref="ArgumentOutOfRangeException">バイトシーケンスの長さが <#= info.ByteSize #> 未満です。</exception>
+        /// <returns>バイトシーケンスから変換された CRC 値。</returns>
+        public static global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #> ToRawValue(System.ReadOnlySpan<byte> hash)
+        {
+            if (hash.Length < <#= info.ByteSize #>)
+                throw new ArgumentOutOfRangeException(nameof(hash), <#= info.ByteSize #>, "バイトシーケンスから CRC 値を取得するには、シーケンスの長さが <#= info.ByteSize #> 以上である必要があります。");
+<# if (info.ByteSize == 1) { #>
+            return hash[0];
+<# } else { #>
+            return BitConverter.To<#= info.CRCType.Name #>(hash);
+<# } #>
+        }
+
+        /// <summary>
+        /// CRC 値をバイト配列へ変換します。
+        /// </summary>
+        /// <param name="crc">変換を行う CRC 値。</param>
+        /// <returns>CRC 値を変換したバイト配列。</returns>
+        public static byte[] ToBytes(global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #> crc)
+        {
+            Span<byte> result = stackalloc byte[ByteSize];
+<# for (var i = 0; i < info.ByteSize; i++) { #>
+            result[<#= i #>] = (byte)(crc >> <#= 8 * i #>);
+<# } #>
+            return result.ToArray();
         }
 
         #region IDisposable
