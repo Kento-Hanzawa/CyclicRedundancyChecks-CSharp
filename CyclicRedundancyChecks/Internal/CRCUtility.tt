@@ -51,6 +51,7 @@ namespace CyclicRedundancyChecks
         /// <param name="reversedData">反転を行う場合は <see langword="true"/>。しない場合は <see langword="false"/>。</param>
         public static void TableFill(Span<global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #>> table, global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #> polynomial, bool reversedData)
         {
+            polynomial = reversedData ? BitReverse(polynomial) : polynomial;
             for (int i = 0; i < table.Length; i++)
             {
                 table[i] = Obtener((byte)(i & 0xFF));
@@ -63,22 +64,28 @@ namespace CyclicRedundancyChecks
 
                 global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #> result;
                 if (reversedData)
-                    result = (global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #>)((global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #>)(BitReverse(position) & 0xFF) << (BitSize - 8));
-                else
-                    result = (global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #>)((global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #>)            position          << (BitSize - 8));
-
-                for (var i = 0; i < 8; i++)
                 {
-                    if ((result & TopBit) == 0)
-                        result = (global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #>)(result << 1);
-                    else
-                        result = (global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #>)((result << 1) ^ polynomial);
+                    result = (global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #>)position;
+                    for (var i = 0; i < 8; i++)
+                    {
+                        if ((result & 1) == 0)
+                            result = (global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #>)(result >> 1);
+                        else
+                            result = (global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #>)((result >> 1) ^ polynomial);
+                    }
                 }
-
-                if (reversedData)
-                    return BitReverse(result);
                 else
-                    return result;
+                {
+                    result = (global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #>)((global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #>)position << (BitSize - 8));
+                    for (var i = 0; i < 8; i++)
+                    {
+                        if ((result & TopBit) == 0)
+                            result = (global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #>)(result << 1);
+                        else
+                            result = (global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #>)((result << 1) ^ polynomial);
+                    }
+                }
+                return result;
             }
         }
 

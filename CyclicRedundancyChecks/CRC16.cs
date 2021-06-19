@@ -9,7 +9,7 @@
 namespace CyclicRedundancyChecks
 {
     /// <summary>
-    /// 入力データの CRC16/CCITT-FALSE ハッシュを計算します。
+    /// 入力データの CRC-16-CCITT-FALSE ハッシュを計算します。
     /// </summary>
     public sealed class CRC16_CCITT_FALSE : CRC16
     {
@@ -34,7 +34,7 @@ namespace CyclicRedundancyChecks
     }
 
     /// <summary>
-    /// 入力データの CRC16/ARC ハッシュを計算します。
+    /// 入力データの CRC-16-ARC ハッシュを計算します。
     /// </summary>
     public sealed class CRC16_ARC : CRC16
     {
@@ -59,7 +59,7 @@ namespace CyclicRedundancyChecks
     }
 
     /// <summary>
-    /// 入力データの CRC16/AUG-CCITT ハッシュを計算します。
+    /// 入力データの CRC-16-AUG-CCITT ハッシュを計算します。
     /// </summary>
     public sealed class CRC16_AUG_CCITT : CRC16
     {
@@ -84,7 +84,7 @@ namespace CyclicRedundancyChecks
     }
 
     /// <summary>
-    /// 入力データの CRC16/BUYPASS ハッシュを計算します。
+    /// 入力データの CRC-16-BUYPASS ハッシュを計算します。
     /// </summary>
     public sealed class CRC16_BUYPASS : CRC16
     {
@@ -109,7 +109,7 @@ namespace CyclicRedundancyChecks
     }
 
     /// <summary>
-    /// 入力データの CRC16/CDMA2000 ハッシュを計算します。
+    /// 入力データの CRC-16-CDMA2000 ハッシュを計算します。
     /// </summary>
     public sealed class CRC16_CDMA2000 : CRC16
     {
@@ -134,7 +134,7 @@ namespace CyclicRedundancyChecks
     }
 
     /// <summary>
-    /// 入力データの CRC16/DDS-110 ハッシュを計算します。
+    /// 入力データの CRC-16-DDS-110 ハッシュを計算します。
     /// </summary>
     public sealed class CRC16_DDS_110 : CRC16
     {
@@ -159,7 +159,7 @@ namespace CyclicRedundancyChecks
     }
 
     /// <summary>
-    /// 入力データの CRC16/DECT-R ハッシュを計算します。
+    /// 入力データの CRC-16-DECT-R ハッシュを計算します。
     /// </summary>
     public sealed class CRC16_DECT_R : CRC16
     {
@@ -184,7 +184,7 @@ namespace CyclicRedundancyChecks
     }
 
     /// <summary>
-    /// 入力データの CRC16/DECT-X ハッシュを計算します。
+    /// 入力データの CRC-16-DECT-X ハッシュを計算します。
     /// </summary>
     public sealed class CRC16_DECT_X : CRC16
     {
@@ -209,7 +209,7 @@ namespace CyclicRedundancyChecks
     }
 
     /// <summary>
-    /// 入力データの CRC16/DNP ハッシュを計算します。
+    /// 入力データの CRC-16-DNP ハッシュを計算します。
     /// </summary>
     public sealed class CRC16_DNP : CRC16
     {
@@ -234,7 +234,7 @@ namespace CyclicRedundancyChecks
     }
 
     /// <summary>
-    /// 入力データの CRC16/EN-13757 ハッシュを計算します。
+    /// 入力データの CRC-16-EN-13757 ハッシュを計算します。
     /// </summary>
     public sealed class CRC16_EN_13757 : CRC16
     {
@@ -259,7 +259,7 @@ namespace CyclicRedundancyChecks
     }
 
     /// <summary>
-    /// 入力データの CRC16/GENIBUS ハッシュを計算します。
+    /// 入力データの CRC-16-GENIBUS ハッシュを計算します。
     /// </summary>
     public sealed class CRC16_GENIBUS : CRC16
     {
@@ -284,7 +284,7 @@ namespace CyclicRedundancyChecks
     }
 
     /// <summary>
-    /// 入力データの CRC16/MAXIM ハッシュを計算します。
+    /// 入力データの CRC-16-MAXIM ハッシュを計算します。
     /// </summary>
     public sealed class CRC16_MAXIM : CRC16
     {
@@ -309,7 +309,7 @@ namespace CyclicRedundancyChecks
     }
 
     /// <summary>
-    /// 入力データの CRC16/MCRF4XX ハッシュを計算します。
+    /// 入力データの CRC-16-MCRF4XX ハッシュを計算します。
     /// </summary>
     public sealed class CRC16_MCRF4XX : CRC16
     {
@@ -334,7 +334,7 @@ namespace CyclicRedundancyChecks
     }
 
     /// <summary>
-    /// 入力データの CRC16/RIELLO ハッシュを計算します。
+    /// 入力データの CRC-16-RIELLO ハッシュを計算します。
     /// </summary>
     public sealed class CRC16_RIELLO : CRC16
     {
@@ -359,7 +359,7 @@ namespace CyclicRedundancyChecks
     }
 
     /// <summary>
-    /// 入力データの CRC16/T10-DIF ハッシュを計算します。
+    /// 入力データの CRC-16-T10-DIF ハッシュを計算します。
     /// </summary>
     public sealed class CRC16_T10_DIF : CRC16
     {
@@ -384,7 +384,7 @@ namespace CyclicRedundancyChecks
     }
 
     /// <summary>
-    /// 入力データの CRC16/TELEDISK ハッシュを計算します。
+    /// 入力データの CRC-16-TELEDISK ハッシュを計算します。
     /// </summary>
     public sealed class CRC16_TELEDISK : CRC16
     {
@@ -409,7 +409,7 @@ namespace CyclicRedundancyChecks
     }
 
     /// <summary>
-    /// 入力データの CRC16/TMS37157 ハッシュを計算します。
+    /// 入力データの CRC-16-TMS37157 ハッシュを計算します。
     /// </summary>
     public sealed class CRC16_TMS37157 : CRC16
     {
@@ -434,7 +434,7 @@ namespace CyclicRedundancyChecks
     }
 
     /// <summary>
-    /// 入力データの CRC16/USB ハッシュを計算します。
+    /// 入力データの CRC-16-USB ハッシュを計算します。
     /// </summary>
     public sealed class CRC16_USB : CRC16
     {
@@ -459,12 +459,12 @@ namespace CyclicRedundancyChecks
     }
 
     /// <summary>
-    /// 入力データの CRCA ハッシュを計算します。
+    /// 入力データの CRC-16-A ハッシュを計算します。
     /// </summary>
-    public sealed class CRC_A : CRC16
+    public sealed class CRC16_A : CRC16
     {
         /// <summary>
-        /// <see cref="CRC_A"/> クラスの新しいインスタンスを作成します。
+        /// <see cref="CRC16_A"/> クラスの新しいインスタンスを作成します。
         /// </summary>
         /// <remarks>
         /// <para>以下のインスタンス作成と同じです。</para>
@@ -477,14 +477,14 @@ namespace CyclicRedundancyChecks
         ///     reversedOut  : true
         /// )
         /// </remarks>
-        public CRC_A() 
+        public CRC16_A() 
             : base(0x1021, 0xC6C6, 0x0000, true, true)
         {
         }
     }
 
     /// <summary>
-    /// 入力データの CRC16/KERMIT ハッシュを計算します。
+    /// 入力データの CRC-16-KERMIT ハッシュを計算します。
     /// </summary>
     public sealed class CRC16_KERMIT : CRC16
     {
@@ -509,7 +509,7 @@ namespace CyclicRedundancyChecks
     }
 
     /// <summary>
-    /// 入力データの CRC16/MODBUS ハッシュを計算します。
+    /// 入力データの CRC-16-MODBUS ハッシュを計算します。
     /// </summary>
     public sealed class CRC16_MODBUS : CRC16
     {
@@ -534,7 +534,7 @@ namespace CyclicRedundancyChecks
     }
 
     /// <summary>
-    /// 入力データの CRC16/X-25 ハッシュを計算します。
+    /// 入力データの CRC-16-X-25 ハッシュを計算します。
     /// </summary>
     public sealed class CRC16_X_25 : CRC16
     {
@@ -559,7 +559,7 @@ namespace CyclicRedundancyChecks
     }
 
     /// <summary>
-    /// 入力データの CRC16/XMODEM ハッシュを計算します。
+    /// 入力データの CRC-16-XMODEM ハッシュを計算します。
     /// </summary>
     public sealed class CRC16_XMODEM : CRC16
     {

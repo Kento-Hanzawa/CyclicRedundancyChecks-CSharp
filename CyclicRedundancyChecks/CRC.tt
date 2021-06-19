@@ -50,7 +50,7 @@ namespace CyclicRedundancyChecks
         private const int ByteSize = sizeof(global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #>);
         private const int BitSize = ByteSize * 8;
 
-        private global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #> result;
+        public global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #> result;
         private readonly global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #>[] lookupTableBuffer;
 
         public global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #> Polynomial { get; }
@@ -91,12 +91,12 @@ namespace CyclicRedundancyChecks
             {
                 if (ReversedData)
                 {
-                    var tableIndex = (int)((result & 0xFF) ^ source[i]);
+                    var tableIndex = (int)((result ^ source[i]) & 0xFF);
                     result = (global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #>)((result >> 8) ^ LookupTable[tableIndex]);
                 }
                 else
                 {
-                    var tableIndex = (int)(((result >> (BitSize - 8)) & 0xFF) ^ source[i]);
+                    var tableIndex = (int)(((result >> (BitSize - 8)) ^ source[i]) & 0xFF);
                     result = (global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #>)((result << 8) ^ LookupTable[tableIndex]);
                 }
             }
@@ -124,13 +124,14 @@ namespace CyclicRedundancyChecks
                 result = (global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #>)(result & ((global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #>)1 << BitSize) - 1);
             }
 
+            if (ReversedData)
+                result = CRCUtility.BitReverse(result);
             if (ReversedOut)
-                result = (global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #>)(~result ^ FinalXorValue);
-            else
-                result = (global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #>)(result ^ FinalXorValue);
+                result = CRCUtility.BitReverse(result);
+            result ^= FinalXorValue;
 
 <# for (var i = 0; i < info.ByteSize; i++) { #>
-            destination[<#= i #>] = (byte)(result >> <#= info.BitSize - (8 * (i + 1)) #>);
+            destination[<#= i #>] = (byte)(result >> <#= 8 * i #>);
 <# } #>
             bytesWritten = ByteSize;
             return true;

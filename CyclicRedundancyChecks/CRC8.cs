@@ -8,7 +8,7 @@
 namespace CyclicRedundancyChecks
 {
     /// <summary>
-    /// 入力データの CRC8 ハッシュを計算します。
+    /// 入力データの CRC-8 ハッシュを計算します。
     /// </summary>
     public sealed class CRC8_STANDARD : CRC8
     {
@@ -33,7 +33,7 @@ namespace CyclicRedundancyChecks
     }
 
     /// <summary>
-    /// 入力データの CRC8/CDMA2000 ハッシュを計算します。
+    /// 入力データの CRC-8-CDMA2000 ハッシュを計算します。
     /// </summary>
     public sealed class CRC8_CDMA2000 : CRC8
     {
@@ -58,7 +58,7 @@ namespace CyclicRedundancyChecks
     }
 
     /// <summary>
-    /// 入力データの CRC8/DARC ハッシュを計算します。
+    /// 入力データの CRC-8-DARC ハッシュを計算します。
     /// </summary>
     public sealed class CRC8_DARC : CRC8
     {
@@ -83,7 +83,7 @@ namespace CyclicRedundancyChecks
     }
 
     /// <summary>
-    /// 入力データの CRC8/DVB-S2 ハッシュを計算します。
+    /// 入力データの CRC-8-DVB-S2 ハッシュを計算します。
     /// </summary>
     public sealed class CRC8_DVB_S2 : CRC8
     {
@@ -108,7 +108,7 @@ namespace CyclicRedundancyChecks
     }
 
     /// <summary>
-    /// 入力データの CRC8/EBU ハッシュを計算します。
+    /// 入力データの CRC-8-EBU ハッシュを計算します。
     /// </summary>
     public sealed class CRC8_EBU : CRC8
     {
@@ -133,7 +133,7 @@ namespace CyclicRedundancyChecks
     }
 
     /// <summary>
-    /// 入力データの CRC8/I-CODE ハッシュを計算します。
+    /// 入力データの CRC-8-I-CODE ハッシュを計算します。
     /// </summary>
     public sealed class CRC8_I_CODE : CRC8
     {
@@ -158,7 +158,7 @@ namespace CyclicRedundancyChecks
     }
 
     /// <summary>
-    /// 入力データの CRC8/ITU ハッシュを計算します。
+    /// 入力データの CRC-8-ITU ハッシュを計算します。
     /// </summary>
     public sealed class CRC8_ITU : CRC8
     {
@@ -183,7 +183,7 @@ namespace CyclicRedundancyChecks
     }
 
     /// <summary>
-    /// 入力データの CRC8/MAXIM ハッシュを計算します。
+    /// 入力データの CRC-8-MAXIM ハッシュを計算します。
     /// </summary>
     public sealed class CRC8_MAXIM : CRC8
     {
@@ -208,7 +208,7 @@ namespace CyclicRedundancyChecks
     }
 
     /// <summary>
-    /// 入力データの CRC8/ROHC ハッシュを計算します。
+    /// 入力データの CRC-8-ROHC ハッシュを計算します。
     /// </summary>
     public sealed class CRC8_ROHC : CRC8
     {
@@ -233,7 +233,7 @@ namespace CyclicRedundancyChecks
     }
 
     /// <summary>
-    /// 入力データの CRC8/WCDMA ハッシュを計算します。
+    /// 入力データの CRC-8-WCDMA ハッシュを計算します。
     /// </summary>
     public sealed class CRC8_WCDMA : CRC8
     {

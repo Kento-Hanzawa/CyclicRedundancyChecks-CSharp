@@ -107,6 +107,7 @@ namespace CyclicRedundancyChecks
         /// <param name="reversedData">反転を行う場合は <see langword="true"/>。しない場合は <see langword="false"/>。</param>
         public static void TableFill(Span<global::System.Byte> table, global::System.Byte polynomial, bool reversedData)
         {
+            polynomial = reversedData ? BitReverse(polynomial) : polynomial;
             for (int i = 0; i < table.Length; i++)
             {
                 table[i] = Obtener((byte)(i & 0xFF));
@@ -119,22 +120,28 @@ namespace CyclicRedundancyChecks
 
                 global::System.Byte result;
                 if (reversedData)
-                    result = (global::System.Byte)((global::System.Byte)(BitReverse(position) & 0xFF) << (BitSize - 8));
-                else
-                    result = (global::System.Byte)((global::System.Byte)            position          << (BitSize - 8));
-
-                for (var i = 0; i < 8; i++)
                 {
-                    if ((result & TopBit) == 0)
-                        result = (global::System.Byte)(result << 1);
-                    else
-                        result = (global::System.Byte)((result << 1) ^ polynomial);
+                    result = (global::System.Byte)position;
+                    for (var i = 0; i < 8; i++)
+                    {
+                        if ((result & 1) == 0)
+                            result = (global::System.Byte)(result >> 1);
+                        else
+                            result = (global::System.Byte)((result >> 1) ^ polynomial);
+                    }
                 }
-
-                if (reversedData)
-                    return BitReverse(result);
                 else
-                    return result;
+                {
+                    result = (global::System.Byte)((global::System.Byte)position << (BitSize - 8));
+                    for (var i = 0; i < 8; i++)
+                    {
+                        if ((result & TopBit) == 0)
+                            result = (global::System.Byte)(result << 1);
+                        else
+                            result = (global::System.Byte)((result << 1) ^ polynomial);
+                    }
+                }
+                return result;
             }
         }
 
@@ -146,6 +153,7 @@ namespace CyclicRedundancyChecks
         /// <param name="reversedData">反転を行う場合は <see langword="true"/>。しない場合は <see langword="false"/>。</param>
         public static void TableFill(Span<global::System.UInt16> table, global::System.UInt16 polynomial, bool reversedData)
         {
+            polynomial = reversedData ? BitReverse(polynomial) : polynomial;
             for (int i = 0; i < table.Length; i++)
             {
                 table[i] = Obtener((byte)(i & 0xFF));
@@ -158,22 +166,28 @@ namespace CyclicRedundancyChecks
 
                 global::System.UInt16 result;
                 if (reversedData)
-                    result = (global::System.UInt16)((global::System.UInt16)(BitReverse(position) & 0xFF) << (BitSize - 8));
-                else
-                    result = (global::System.UInt16)((global::System.UInt16)            position          << (BitSize - 8));
-
-                for (var i = 0; i < 8; i++)
                 {
-                    if ((result & TopBit) == 0)
-                        result = (global::System.UInt16)(result << 1);
-                    else
-                        result = (global::System.UInt16)((result << 1) ^ polynomial);
+                    result = (global::System.UInt16)position;
+                    for (var i = 0; i < 8; i++)
+                    {
+                        if ((result & 1) == 0)
+                            result = (global::System.UInt16)(result >> 1);
+                        else
+                            result = (global::System.UInt16)((result >> 1) ^ polynomial);
+                    }
                 }
-
-                if (reversedData)
-                    return BitReverse(result);
                 else
-                    return result;
+                {
+                    result = (global::System.UInt16)((global::System.UInt16)position << (BitSize - 8));
+                    for (var i = 0; i < 8; i++)
+                    {
+                        if ((result & TopBit) == 0)
+                            result = (global::System.UInt16)(result << 1);
+                        else
+                            result = (global::System.UInt16)((result << 1) ^ polynomial);
+                    }
+                }
+                return result;
             }
         }
 
@@ -185,6 +199,7 @@ namespace CyclicRedundancyChecks
         /// <param name="reversedData">反転を行う場合は <see langword="true"/>。しない場合は <see langword="false"/>。</param>
         public static void TableFill(Span<global::System.UInt32> table, global::System.UInt32 polynomial, bool reversedData)
         {
+            polynomial = reversedData ? BitReverse(polynomial) : polynomial;
             for (int i = 0; i < table.Length; i++)
             {
                 table[i] = Obtener((byte)(i & 0xFF));
@@ -197,22 +212,28 @@ namespace CyclicRedundancyChecks
 
                 global::System.UInt32 result;
                 if (reversedData)
-                    result = (global::System.UInt32)((global::System.UInt32)(BitReverse(position) & 0xFF) << (BitSize - 8));
-                else
-                    result = (global::System.UInt32)((global::System.UInt32)            position          << (BitSize - 8));
-
-                for (var i = 0; i < 8; i++)
                 {
-                    if ((result & TopBit) == 0)
-                        result = (global::System.UInt32)(result << 1);
-                    else
-                        result = (global::System.UInt32)((result << 1) ^ polynomial);
+                    result = (global::System.UInt32)position;
+                    for (var i = 0; i < 8; i++)
+                    {
+                        if ((result & 1) == 0)
+                            result = (global::System.UInt32)(result >> 1);
+                        else
+                            result = (global::System.UInt32)((result >> 1) ^ polynomial);
+                    }
                 }
-
-                if (reversedData)
-                    return BitReverse(result);
                 else
-                    return result;
+                {
+                    result = (global::System.UInt32)((global::System.UInt32)position << (BitSize - 8));
+                    for (var i = 0; i < 8; i++)
+                    {
+                        if ((result & TopBit) == 0)
+                            result = (global::System.UInt32)(result << 1);
+                        else
+                            result = (global::System.UInt32)((result << 1) ^ polynomial);
+                    }
+                }
+                return result;
             }
         }
 
@@ -224,6 +245,7 @@ namespace CyclicRedundancyChecks
         /// <param name="reversedData">反転を行う場合は <see langword="true"/>。しない場合は <see langword="false"/>。</param>
         public static void TableFill(Span<global::System.UInt64> table, global::System.UInt64 polynomial, bool reversedData)
         {
+            polynomial = reversedData ? BitReverse(polynomial) : polynomial;
             for (int i = 0; i < table.Length; i++)
             {
                 table[i] = Obtener((byte)(i & 0xFF));
@@ -236,22 +258,28 @@ namespace CyclicRedundancyChecks
 
                 global::System.UInt64 result;
                 if (reversedData)
-                    result = (global::System.UInt64)((global::System.UInt64)(BitReverse(position) & 0xFF) << (BitSize - 8));
-                else
-                    result = (global::System.UInt64)((global::System.UInt64)            position          << (BitSize - 8));
-
-                for (var i = 0; i < 8; i++)
                 {
-                    if ((result & TopBit) == 0)
-                        result = (global::System.UInt64)(result << 1);
-                    else
-                        result = (global::System.UInt64)((result << 1) ^ polynomial);
+                    result = (global::System.UInt64)position;
+                    for (var i = 0; i < 8; i++)
+                    {
+                        if ((result & 1) == 0)
+                            result = (global::System.UInt64)(result >> 1);
+                        else
+                            result = (global::System.UInt64)((result >> 1) ^ polynomial);
+                    }
                 }
-
-                if (reversedData)
-                    return BitReverse(result);
                 else
-                    return result;
+                {
+                    result = (global::System.UInt64)((global::System.UInt64)position << (BitSize - 8));
+                    for (var i = 0; i < 8; i++)
+                    {
+                        if ((result & TopBit) == 0)
+                            result = (global::System.UInt64)(result << 1);
+                        else
+                            result = (global::System.UInt64)((result << 1) ^ polynomial);
+                    }
+                }
+                return result;
             }
         }
 

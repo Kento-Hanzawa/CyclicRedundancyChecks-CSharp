@@ -19,55 +19,55 @@ namespace CyclicRedundancyChecks
         public static void RegisterAlgorithm()
         {
             // CRC8
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC8_STANDARD), "CRC8");
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC8_CDMA2000), "CRC8/CDMA2000");
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC8_DARC), "CRC8/DARC");
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC8_DVB_S2), "CRC8/DVB-S2");
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC8_EBU), "CRC8/EBU");
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC8_I_CODE), "CRC8/I-CODE");
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC8_ITU), "CRC8/ITU");
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC8_MAXIM), "CRC8/MAXIM");
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC8_ROHC), "CRC8/ROHC");
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC8_WCDMA), "CRC8/WCDMA");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC8_STANDARD), "CRC-8");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC8_CDMA2000), "CRC-8-CDMA2000");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC8_DARC), "CRC-8-DARC");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC8_DVB_S2), "CRC-8-DVB-S2");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC8_EBU), "CRC-8-EBU");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC8_I_CODE), "CRC-8-I-CODE");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC8_ITU), "CRC-8-ITU");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC8_MAXIM), "CRC-8-MAXIM");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC8_ROHC), "CRC-8-ROHC");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC8_WCDMA), "CRC-8-WCDMA");
             // CRC16
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_CCITT_FALSE), "CRC16/CCITT-FALSE");
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_ARC), "CRC16/ARC");
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_AUG_CCITT), "CRC16/AUG-CCITT");
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_BUYPASS), "CRC16/BUYPASS");
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_CDMA2000), "CRC16/CDMA2000");
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_DDS_110), "CRC16/DDS-110");
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_DECT_R), "CRC16/DECT-R");
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_DECT_X), "CRC16/DECT-X");
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_DNP), "CRC16/DNP");
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_EN_13757), "CRC16/EN-13757");
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_GENIBUS), "CRC16/GENIBUS");
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_MAXIM), "CRC16/MAXIM");
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_MCRF4XX), "CRC16/MCRF4XX");
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_RIELLO), "CRC16/RIELLO");
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_T10_DIF), "CRC16/T10-DIF");
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_TELEDISK), "CRC16/TELEDISK");
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_TMS37157), "CRC16/TMS37157");
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_USB), "CRC16/USB");
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC_A), "CRCA");
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_KERMIT), "CRC16/KERMIT");
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_MODBUS), "CRC16/MODBUS");
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_X_25), "CRC16/X-25");
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_XMODEM), "CRC16/XMODEM");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_CCITT_FALSE), "CRC-16-CCITT-FALSE");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_ARC), "CRC-16-ARC");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_AUG_CCITT), "CRC-16-AUG-CCITT");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_BUYPASS), "CRC-16-BUYPASS");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_CDMA2000), "CRC-16-CDMA2000");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_DDS_110), "CRC-16-DDS-110");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_DECT_R), "CRC-16-DECT-R");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_DECT_X), "CRC-16-DECT-X");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_DNP), "CRC-16-DNP");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_EN_13757), "CRC-16-EN-13757");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_GENIBUS), "CRC-16-GENIBUS");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_MAXIM), "CRC-16-MAXIM");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_MCRF4XX), "CRC-16-MCRF4XX");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_RIELLO), "CRC-16-RIELLO");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_T10_DIF), "CRC-16-T10-DIF");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_TELEDISK), "CRC-16-TELEDISK");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_TMS37157), "CRC-16-TMS37157");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_USB), "CRC-16-USB");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_A), "CRC-16-A");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_KERMIT), "CRC-16-KERMIT");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_MODBUS), "CRC-16-MODBUS");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_X_25), "CRC-16-X-25");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC16_XMODEM), "CRC-16-XMODEM");
             // CRC32
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC32_STANDARD), "CRC32");
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC32_BZIP2), "CRC32/BZIP2");
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC32C), "CRC32C");
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC32D), "CRC32D");
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC32_MPEG_2), "CRC32/MPEG-2");
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC32_POSIX), "CRC32/POSIX");
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC32Q), "CRC32Q");
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC32_JAMCRC), "CRC32/JAMCRC");
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC32_XFER), "CRC32/XFER");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC32_STANDARD), "CRC-32");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC32_BZIP2), "CRC-32-BZIP2");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC32_C), "CRC-32-C");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC32_D), "CRC-32-D");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC32_MPEG_2), "CRC-32-MPEG-2");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC32_POSIX), "CRC-32-POSIX");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC32_Q), "CRC-32-Q");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC32_JAMCRC), "CRC-32-JAMCRC");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC32_XFER), "CRC-32-XFER");
             // CRC64
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC64_ECMA_182), "CRC64/ECMA-182");
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC64_GO_ISO), "CRC64/GO-ISO");
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC64_WE), "CRC64/WE");
-            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC64_XZ), "CRC64/XZ");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC64_ECMA_182), "CRC-64-ECMA-182");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC64_GO_ISO), "CRC-64-GO-ISO");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC64_WE), "CRC-64-WE");
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.CRC64_XZ), "CRC-64-XZ");
         }
     }
 
@@ -79,7 +79,7 @@ namespace CyclicRedundancyChecks
         private const int ByteSize = sizeof(global::System.Byte);
         private const int BitSize = ByteSize * 8;
 
-        private global::System.Byte result;
+        public global::System.Byte result;
         private readonly global::System.Byte[] lookupTableBuffer;
 
         public global::System.Byte Polynomial { get; }
@@ -120,12 +120,12 @@ namespace CyclicRedundancyChecks
             {
                 if (ReversedData)
                 {
-                    var tableIndex = (int)((result & 0xFF) ^ source[i]);
+                    var tableIndex = (int)((result ^ source[i]) & 0xFF);
                     result = (global::System.Byte)((result >> 8) ^ LookupTable[tableIndex]);
                 }
                 else
                 {
-                    var tableIndex = (int)(((result >> (BitSize - 8)) & 0xFF) ^ source[i]);
+                    var tableIndex = (int)(((result >> (BitSize - 8)) ^ source[i]) & 0xFF);
                     result = (global::System.Byte)((result << 8) ^ LookupTable[tableIndex]);
                 }
             }
@@ -153,10 +153,11 @@ namespace CyclicRedundancyChecks
                 result = (global::System.Byte)(result & ((global::System.Byte)1 << BitSize) - 1);
             }
 
+            if (ReversedData)
+                result = CRCUtility.BitReverse(result);
             if (ReversedOut)
-                result = (global::System.Byte)(~result ^ FinalXorValue);
-            else
-                result = (global::System.Byte)(result ^ FinalXorValue);
+                result = CRCUtility.BitReverse(result);
+            result ^= FinalXorValue;
 
             destination[0] = (byte)(result >> 0);
             bytesWritten = ByteSize;
@@ -189,7 +190,7 @@ namespace CyclicRedundancyChecks
         private const int ByteSize = sizeof(global::System.UInt16);
         private const int BitSize = ByteSize * 8;
 
-        private global::System.UInt16 result;
+        public global::System.UInt16 result;
         private readonly global::System.UInt16[] lookupTableBuffer;
 
         public global::System.UInt16 Polynomial { get; }
@@ -230,12 +231,12 @@ namespace CyclicRedundancyChecks
             {
                 if (ReversedData)
                 {
-                    var tableIndex = (int)((result & 0xFF) ^ source[i]);
+                    var tableIndex = (int)((result ^ source[i]) & 0xFF);
                     result = (global::System.UInt16)((result >> 8) ^ LookupTable[tableIndex]);
                 }
                 else
                 {
-                    var tableIndex = (int)(((result >> (BitSize - 8)) & 0xFF) ^ source[i]);
+                    var tableIndex = (int)(((result >> (BitSize - 8)) ^ source[i]) & 0xFF);
                     result = (global::System.UInt16)((result << 8) ^ LookupTable[tableIndex]);
                 }
             }
@@ -263,13 +264,14 @@ namespace CyclicRedundancyChecks
                 result = (global::System.UInt16)(result & ((global::System.UInt16)1 << BitSize) - 1);
             }
 
+            if (ReversedData)
+                result = CRCUtility.BitReverse(result);
             if (ReversedOut)
-                result = (global::System.UInt16)(~result ^ FinalXorValue);
-            else
-                result = (global::System.UInt16)(result ^ FinalXorValue);
+                result = CRCUtility.BitReverse(result);
+            result ^= FinalXorValue;
 
-            destination[0] = (byte)(result >> 8);
-            destination[1] = (byte)(result >> 0);
+            destination[0] = (byte)(result >> 0);
+            destination[1] = (byte)(result >> 8);
             bytesWritten = ByteSize;
             return true;
         }
@@ -300,7 +302,7 @@ namespace CyclicRedundancyChecks
         private const int ByteSize = sizeof(global::System.UInt32);
         private const int BitSize = ByteSize * 8;
 
-        private global::System.UInt32 result;
+        public global::System.UInt32 result;
         private readonly global::System.UInt32[] lookupTableBuffer;
 
         public global::System.UInt32 Polynomial { get; }
@@ -341,12 +343,12 @@ namespace CyclicRedundancyChecks
             {
                 if (ReversedData)
                 {
-                    var tableIndex = (int)((result & 0xFF) ^ source[i]);
+                    var tableIndex = (int)((result ^ source[i]) & 0xFF);
                     result = (global::System.UInt32)((result >> 8) ^ LookupTable[tableIndex]);
                 }
                 else
                 {
-                    var tableIndex = (int)(((result >> (BitSize - 8)) & 0xFF) ^ source[i]);
+                    var tableIndex = (int)(((result >> (BitSize - 8)) ^ source[i]) & 0xFF);
                     result = (global::System.UInt32)((result << 8) ^ LookupTable[tableIndex]);
                 }
             }
@@ -374,15 +376,16 @@ namespace CyclicRedundancyChecks
                 result = (global::System.UInt32)(result & ((global::System.UInt32)1 << BitSize) - 1);
             }
 
+            if (ReversedData)
+                result = CRCUtility.BitReverse(result);
             if (ReversedOut)
-                result = (global::System.UInt32)(~result ^ FinalXorValue);
-            else
-                result = (global::System.UInt32)(result ^ FinalXorValue);
+                result = CRCUtility.BitReverse(result);
+            result ^= FinalXorValue;
 
-            destination[0] = (byte)(result >> 24);
-            destination[1] = (byte)(result >> 16);
-            destination[2] = (byte)(result >> 8);
-            destination[3] = (byte)(result >> 0);
+            destination[0] = (byte)(result >> 0);
+            destination[1] = (byte)(result >> 8);
+            destination[2] = (byte)(result >> 16);
+            destination[3] = (byte)(result >> 24);
             bytesWritten = ByteSize;
             return true;
         }
@@ -413,7 +416,7 @@ namespace CyclicRedundancyChecks
         private const int ByteSize = sizeof(global::System.UInt64);
         private const int BitSize = ByteSize * 8;
 
-        private global::System.UInt64 result;
+        public global::System.UInt64 result;
         private readonly global::System.UInt64[] lookupTableBuffer;
 
         public global::System.UInt64 Polynomial { get; }
@@ -454,12 +457,12 @@ namespace CyclicRedundancyChecks
             {
                 if (ReversedData)
                 {
-                    var tableIndex = (int)((result & 0xFF) ^ source[i]);
+                    var tableIndex = (int)((result ^ source[i]) & 0xFF);
                     result = (global::System.UInt64)((result >> 8) ^ LookupTable[tableIndex]);
                 }
                 else
                 {
-                    var tableIndex = (int)(((result >> (BitSize - 8)) & 0xFF) ^ source[i]);
+                    var tableIndex = (int)(((result >> (BitSize - 8)) ^ source[i]) & 0xFF);
                     result = (global::System.UInt64)((result << 8) ^ LookupTable[tableIndex]);
                 }
             }
@@ -487,19 +490,20 @@ namespace CyclicRedundancyChecks
                 result = (global::System.UInt64)(result & ((global::System.UInt64)1 << BitSize) - 1);
             }
 
+            if (ReversedData)
+                result = CRCUtility.BitReverse(result);
             if (ReversedOut)
-                result = (global::System.UInt64)(~result ^ FinalXorValue);
-            else
-                result = (global::System.UInt64)(result ^ FinalXorValue);
+                result = CRCUtility.BitReverse(result);
+            result ^= FinalXorValue;
 
-            destination[0] = (byte)(result >> 56);
-            destination[1] = (byte)(result >> 48);
-            destination[2] = (byte)(result >> 40);
-            destination[3] = (byte)(result >> 32);
-            destination[4] = (byte)(result >> 24);
-            destination[5] = (byte)(result >> 16);
-            destination[6] = (byte)(result >> 8);
-            destination[7] = (byte)(result >> 0);
+            destination[0] = (byte)(result >> 0);
+            destination[1] = (byte)(result >> 8);
+            destination[2] = (byte)(result >> 16);
+            destination[3] = (byte)(result >> 24);
+            destination[4] = (byte)(result >> 32);
+            destination[5] = (byte)(result >> 40);
+            destination[6] = (byte)(result >> 48);
+            destination[7] = (byte)(result >> 56);
             bytesWritten = ByteSize;
             return true;
         }

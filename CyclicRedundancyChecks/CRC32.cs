@@ -9,7 +9,7 @@
 namespace CyclicRedundancyChecks
 {
     /// <summary>
-    /// 入力データの CRC32 ハッシュを計算します。
+    /// 入力データの CRC-32 ハッシュを計算します。
     /// </summary>
     public sealed class CRC32_STANDARD : CRC32
     {
@@ -34,7 +34,7 @@ namespace CyclicRedundancyChecks
     }
 
     /// <summary>
-    /// 入力データの CRC32/BZIP2 ハッシュを計算します。
+    /// 入力データの CRC-32-BZIP2 ハッシュを計算します。
     /// </summary>
     public sealed class CRC32_BZIP2 : CRC32
     {
@@ -59,12 +59,12 @@ namespace CyclicRedundancyChecks
     }
 
     /// <summary>
-    /// 入力データの CRC32C ハッシュを計算します。
+    /// 入力データの CRC-32-C ハッシュを計算します。
     /// </summary>
-    public sealed class CRC32C : CRC32
+    public sealed class CRC32_C : CRC32
     {
         /// <summary>
-        /// <see cref="CRC32C"/> クラスの新しいインスタンスを作成します。
+        /// <see cref="CRC32_C"/> クラスの新しいインスタンスを作成します。
         /// </summary>
         /// <remarks>
         /// <para>以下のインスタンス作成と同じです。</para>
@@ -77,19 +77,19 @@ namespace CyclicRedundancyChecks
         ///     reversedOut  : true
         /// )
         /// </remarks>
-        public CRC32C() 
+        public CRC32_C() 
             : base(0x1EDC6F41, 0xFFFFFFFF, 0xFFFFFFFF, true, true)
         {
         }
     }
 
     /// <summary>
-    /// 入力データの CRC32D ハッシュを計算します。
+    /// 入力データの CRC-32-D ハッシュを計算します。
     /// </summary>
-    public sealed class CRC32D : CRC32
+    public sealed class CRC32_D : CRC32
     {
         /// <summary>
-        /// <see cref="CRC32D"/> クラスの新しいインスタンスを作成します。
+        /// <see cref="CRC32_D"/> クラスの新しいインスタンスを作成します。
         /// </summary>
         /// <remarks>
         /// <para>以下のインスタンス作成と同じです。</para>
@@ -102,14 +102,14 @@ namespace CyclicRedundancyChecks
         ///     reversedOut  : true
         /// )
         /// </remarks>
-        public CRC32D() 
+        public CRC32_D() 
             : base(0xA833982B, 0xFFFFFFFF, 0xFFFFFFFF, true, true)
         {
         }
     }
 
     /// <summary>
-    /// 入力データの CRC32/MPEG-2 ハッシュを計算します。
+    /// 入力データの CRC-32-MPEG-2 ハッシュを計算します。
     /// </summary>
     public sealed class CRC32_MPEG_2 : CRC32
     {
@@ -134,7 +134,7 @@ namespace CyclicRedundancyChecks
     }
 
     /// <summary>
-    /// 入力データの CRC32/POSIX ハッシュを計算します。
+    /// 入力データの CRC-32-POSIX ハッシュを計算します。
     /// </summary>
     public sealed class CRC32_POSIX : CRC32
     {
@@ -159,12 +159,12 @@ namespace CyclicRedundancyChecks
     }
 
     /// <summary>
-    /// 入力データの CRC32Q ハッシュを計算します。
+    /// 入力データの CRC-32-Q ハッシュを計算します。
     /// </summary>
-    public sealed class CRC32Q : CRC32
+    public sealed class CRC32_Q : CRC32
     {
         /// <summary>
-        /// <see cref="CRC32Q"/> クラスの新しいインスタンスを作成します。
+        /// <see cref="CRC32_Q"/> クラスの新しいインスタンスを作成します。
         /// </summary>
         /// <remarks>
         /// <para>以下のインスタンス作成と同じです。</para>
@@ -177,14 +177,14 @@ namespace CyclicRedundancyChecks
         ///     reversedOut  : false
         /// )
         /// </remarks>
-        public CRC32Q() 
+        public CRC32_Q() 
             : base(0x814141AB, 0x00000000, 0x00000000, false, false)
         {
         }
     }
 
     /// <summary>
-    /// 入力データの CRC32/JAMCRC ハッシュを計算します。
+    /// 入力データの CRC-32-JAMCRC ハッシュを計算します。
     /// </summary>
     public sealed class CRC32_JAMCRC : CRC32
     {
@@ -209,7 +209,7 @@ namespace CyclicRedundancyChecks
     }
 
     /// <summary>
-    /// 入力データの CRC32/XFER ハッシュを計算します。
+    /// 入力データの CRC-32-XFER ハッシュを計算します。
     /// </summary>
     public sealed class CRC32_XFER : CRC32
     {

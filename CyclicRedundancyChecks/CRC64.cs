@@ -9,7 +9,7 @@
 namespace CyclicRedundancyChecks
 {
     /// <summary>
-    /// 入力データの CRC64/ECMA-182 ハッシュを計算します。
+    /// 入力データの CRC-64-ECMA-182 ハッシュを計算します。
     /// </summary>
     public sealed class CRC64_ECMA_182 : CRC64
     {
@@ -34,7 +34,7 @@ namespace CyclicRedundancyChecks
     }
 
     /// <summary>
-    /// 入力データの CRC64/GO-ISO ハッシュを計算します。
+    /// 入力データの CRC-64-GO-ISO ハッシュを計算します。
     /// </summary>
     public sealed class CRC64_GO_ISO : CRC64
     {
@@ -59,7 +59,7 @@ namespace CyclicRedundancyChecks
     }
 
     /// <summary>
-    /// 入力データの CRC64/WE ハッシュを計算します。
+    /// 入力データの CRC-64-WE ハッシュを計算します。
     /// </summary>
     public sealed class CRC64_WE : CRC64
     {
@@ -84,7 +84,7 @@ namespace CyclicRedundancyChecks
     }
 
     /// <summary>
-    /// 入力データの CRC64/XZ ハッシュを計算します。
+    /// 入力データの CRC-64-XZ ハッシュを計算します。
     /// </summary>
     public sealed class CRC64_XZ : CRC64
     {
