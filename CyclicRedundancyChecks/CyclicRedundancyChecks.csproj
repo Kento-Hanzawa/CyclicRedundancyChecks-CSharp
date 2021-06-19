@@ -9,12 +9,32 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="CRC16.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CRC16.tt</DependentUpon>
+    </Compile>
+    <Compile Update="CRC32.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CRC32.tt</DependentUpon>
+    </Compile>
+    <Compile Update="CRC64.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CRC64.tt</DependentUpon>
+    </Compile>
+    <Compile Update="CRC8.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CRC8.tt</DependentUpon>
+    </Compile>
     <Compile Update="Internal\CRCUtility.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>CRCUtility.tt</DependentUpon>
     </Compile>
-    <Compile Update="CRC.tt.cs">
+    <Compile Update="CRC.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>CRC.tt</DependentUpon>
@@ -22,13 +42,29 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="CRC16.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CRC16.cs</LastGenOutput>
+    </None>
+    <None Update="CRC32.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CRC32.cs</LastGenOutput>
+    </None>
+    <None Update="CRC64.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CRC64.cs</LastGenOutput>
+    </None>
+    <None Update="CRC8.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CRC8.cs</LastGenOutput>
+    </None>
     <None Update="Internal\CRCUtility.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>CRCUtility.cs</LastGenOutput>
     </None>
     <None Update="CRC.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CRC.tt.cs</LastGenOutput>
+      <LastGenOutput>CRC.cs</LastGenOutput>
     </None>
   </ItemGroup>
 

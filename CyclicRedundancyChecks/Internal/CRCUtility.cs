@@ -1,4 +1,10 @@
-﻿ 
+﻿//
+// CyclicRedundancyChecks
+// 
+// このコードはテキストテンプレートファイル (.tt) によって作成されています。
+// 変更をおこなう場合は、テキストテンプレートファイル (.tt) を編集してください。
+//
+
 using System;
 
 namespace CyclicRedundancyChecks

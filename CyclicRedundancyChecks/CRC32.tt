@@ -1,0 +1,41 @@
+﻿<#@ template  debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #> 
+<#@ include file="CRC.ttinclude" #>
+namespace CyclicRedundancyChecks
+{
+<# foreach (var info in CRC32Infos) { #>
+    /// <summary>
+    /// 入力データの <#= info.CRCName #> ハッシュを計算します。
+    /// </summary>
+    public sealed class <#= info.ClassName #> : CRC32
+    {
+        /// <summary>
+        /// <see cref="<#= info.ClassName #>"/> クラスの新しいインスタンスを作成します。
+        /// </summary>
+        /// <remarks>
+        /// <para>以下のインスタンス作成と同じです。</para>
+        /// <see langword="new" /> <see cref="CRC32" />
+        /// (
+        ///     polynomial   : <#= "0x" + info.Polynomial.ToString("X8") #>, 
+        ///     initialValue : <#= "0x" + info.InitialValue.ToString("X8") #>, 
+        ///     finalXorValue: <#= "0x" + info.FinalXorValue.ToString("X8") #>, 
+        ///     reversedData : <#= info.ReversedData.ToString().ToLower() #>, 
+        ///     reversedOut  : <#= info.ReversedOut.ToString().ToLower() #>
+        /// )
+        /// </remarks>
+        public <#= info.ClassName #>() 
+            : base(<#= "0x" + info.Polynomial.ToString("X8") #>, <#= "0x" + info.InitialValue.ToString("X8") #>, <#= "0x" + info.FinalXorValue.ToString("X8") #>, <#= info.ReversedData.ToString().ToLower() #>, <#= info.ReversedOut.ToString().ToLower() #>)
+        {
+        }
+    }
+
+<# } #>
+}

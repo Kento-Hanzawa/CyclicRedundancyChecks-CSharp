@@ -7,16 +7,8 @@
 <#@ import namespace="System.Diagnostics" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Collections" #>
-<#@ import namespace="System.Collections.Generic" #> 
-<#
-    var infos = new (string CRCName, Type CRCType, int ByteSize, int BitSize)[]
-    {
-        ( "CRC8"  , typeof(byte)  , sizeof(byte)  , sizeof(byte)   * 8 ),
-        ( "CRC16" , typeof(ushort), sizeof(ushort), sizeof(ushort) * 8 ),
-        ( "CRC32" , typeof(uint)  , sizeof(uint)  , sizeof(uint)   * 8 ),
-        ( "CRC64" , typeof(ulong) , sizeof(ulong) , sizeof(ulong)  * 8 ),
-    };
-#>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="..\CRC.ttinclude" #>
 using System;
 
 namespace CyclicRedundancyChecks
@@ -24,7 +16,7 @@ namespace CyclicRedundancyChecks
     internal static partial class CRCUtility
     {
 #pragma warning disable CS0675 // 符号拡張されたオペランドでビットごとの or 演算子が使用されました
-<# foreach (var info in infos) { #>
+<# foreach (var info in CRCRegulations) { #>
         /// <summary>
         /// <see cref="global::<#= info.CRCType.Namespace #>.<#= info.CRCType.Name #>"/> のビット順序を反転させます。
         /// </summary>
@@ -50,7 +42,7 @@ namespace CyclicRedundancyChecks
 #pragma warning restore CS0675 // 符号拡張されたオペランドでビットごとの or 演算子が使用されました
 
 
-<# foreach (var info in infos) { #>
+<# foreach (var info in CRCRegulations) { #>
         /// <summary>
         /// CRC計算用の LookupTable 値を <paramref name="table"/> に格納します。
         /// </summary>
