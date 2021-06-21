@@ -15,7 +15,7 @@ namespace CyclicRedundancyChecks.Tests
             using (var crc = new CRC32(0x04C11DB7, 0xFFFFFFFF, 0xFFFFFFFF, true, true))
             {
                 var hash = crc.ComputeHash(data);
-                Assert.Equal((uint)0x1A657BE2, CyclicRedundancyChecks.CRC32.ToRawValue(hash));
+                Assert.Equal((uint)0x1A657BE2, BitConverter.ToUInt32(hash));
             }
         }
 
@@ -27,7 +27,7 @@ namespace CyclicRedundancyChecks.Tests
             using (var crc = new CRC32(0x04C11DB7, 0xFFFFFFFF, 0xFFFFFFFF, true, false))
             {
                 var hash = crc.ComputeHash(data);
-                Assert.Equal((uint)0x47DEA658, CyclicRedundancyChecks.CRC32.ToRawValue(hash));
+                Assert.Equal((uint)0x47DEA658, BitConverter.ToUInt32(hash));
             }
         }
 
@@ -39,7 +39,7 @@ namespace CyclicRedundancyChecks.Tests
             using (var crc = new CRC32(0x04C11DB7, 0xFFFFFFFF, 0xFFFFFFFF, false, true))
             {
                 var hash = crc.ComputeHash(data);
-                Assert.Equal((uint)0xE7485EDD, CyclicRedundancyChecks.CRC32.ToRawValue(hash));
+                Assert.Equal((uint)0xE7485EDD, BitConverter.ToUInt32(hash));
             }
         }
 
@@ -51,7 +51,7 @@ namespace CyclicRedundancyChecks.Tests
             using (var crc = new CRC32(0x04C11DB7, 0xFFFFFFFF, 0xFFFFFFFF, false, false))
             {
                 var hash = crc.ComputeHash(data);
-                Assert.Equal((uint)0xBB7A12E7, CyclicRedundancyChecks.CRC32.ToRawValue(hash));
+                Assert.Equal((uint)0xBB7A12E7, BitConverter.ToUInt32(hash));
             }
         }
     }

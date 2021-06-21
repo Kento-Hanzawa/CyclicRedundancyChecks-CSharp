@@ -1,0 +1,223 @@
+﻿<#@ template  debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ Assembly Name="System.Numerics" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #> 
+<#@ import namespace="System.Numerics" #>
+<#@ include file="Header.ttinclude" #>
+<# 
+    var GenerateInfos = new (string ClassName, Type UnderlyingType, int ByteSize, int MaxBitWidth)[]
+    {
+        ("CRCUInt8"     , typeof(Byte)      , sizeof(Byte)  , sizeof(Byte)   * 8),
+        ("CRCUInt16"    , typeof(UInt16)    , sizeof(UInt16), sizeof(UInt16) * 8),
+        ("CRCUInt32"    , typeof(UInt32)    , sizeof(UInt32), sizeof(UInt32) * 8),
+        ("CRCUInt64"    , typeof(UInt64)    , sizeof(UInt64), sizeof(UInt64) * 8),
+        ("CRCBigInteger", typeof(BigInteger),             -1,                 -1),
+    };
+#>
+using System;
+
+namespace CyclicRedundancyChecks.Underlying
+{
+<# foreach (var info in GenerateInfos) { #>
+    /// <summary>
+<# if (info.UnderlyingType == typeof(BigInteger)) { #>
+    /// 64 ビットサイズ以上の CRC 値を計算する機能を提供します。
+<# } else { #>
+    /// 最大 <#= info.MaxBitWidth #> ビットサイズまでの CRC 値を計算する機能を提供します。
+<# } #>
+    /// </summary>
+    public class <#= info.ClassName #> : CRC
+    {
+        private global::<#= info.UnderlyingType.FullName #> result;
+        private readonly global::<#= info.UnderlyingType.FullName #> bitMask;
+        private readonly int byteSize;
+        private readonly global::<#= info.UnderlyingType.FullName #>[] lookupTableBuffer;
+
+        public global::<#= info.UnderlyingType.FullName #> Polynomial { get; }
+        public global::<#= info.UnderlyingType.FullName #> InitialValue { get; }
+        public global::<#= info.UnderlyingType.FullName #> FinalXorValue { get; }
+        public bool ReflectInput { get; }
+        public bool ReflectOutput { get; }
+        public bool IsBigEndianResult { get; set; }
+
+        public ReadOnlySpan<global::<#= info.UnderlyingType.FullName #>> LookupTable { get { return lookupTableBuffer.AsSpan(0, LookupTableSize); } }
+
+        public <#= info.ClassName #>(int bitWidth, global::<#= info.UnderlyingType.FullName #> polynomial, global::<#= info.UnderlyingType.FullName #> initialValue, global::<#= info.UnderlyingType.FullName #> finalXorValue, bool reflectInput, bool reflectOutput, bool isBigEndianResult = false)
+        {
+<# if (info.UnderlyingType != typeof(BigInteger)) { #>
+            const int MaxBitWidth = sizeof(global::<#= info.UnderlyingType.FullName #>) * 8;
+            if (MaxBitWidth < bitWidth)
+            {
+                bitWidth = MaxBitWidth;
+            }
+
+<# } #>
+            this.HashSizeValue = bitWidth;
+
+            this.result = initialValue;
+<# if (info.UnderlyingType == typeof(BigInteger)) { #>
+            this.bitMask = (global::<#= info.UnderlyingType.FullName #>)(((global::<#= info.UnderlyingType.FullName #>)1 << bitWidth) - 1);
+            this.byteSize = (HashSizeValue / 8) + (HashSizeValue % 8 == 0 ? 0 : 1);
+<# } else { #>
+            this.bitMask = (bitWidth == MaxBitWidth) ? (global::<#= info.UnderlyingType.FullName #>)0x<#= new string('F', info.ByteSize * 2) #> : (global::<#= info.UnderlyingType.FullName #>)(((global::<#= info.UnderlyingType.FullName #>)1 << bitWidth) - 1);
+            this.byteSize = sizeof(global::<#= info.UnderlyingType.FullName #>);
+<# } #>
+            this.lookupTableBuffer = System.Buffers.ArrayPool<global::<#= info.UnderlyingType.FullName #>>.Shared.Rent(LookupTableSize);
+
+            this.Polynomial = polynomial;
+            this.InitialValue = initialValue;
+            this.FinalXorValue = finalXorValue;
+            this.ReflectInput = reflectInput;
+            this.ReflectOutput = reflectOutput;
+            this.IsBigEndianResult = isBigEndianResult;
+
+            LookupTableFill();
+        }
+
+        public override void Initialize()
+        {
+            result = InitialValue;
+        }
+
+        protected override void HashCore(byte[] array, int ibStart, int cbSize)
+        {
+            HashCore(array.AsSpan(ibStart, cbSize));
+        }
+
+        protected override void HashCore(ReadOnlySpan<byte> source)
+        {
+            for (var i = 0; i < source.Length; i++)
+            {
+                if (ReflectInput)
+                {
+                    var tableIndex = (int)((result ^ source[i]) & 0xFF);
+                    result = (global::<#= info.UnderlyingType.FullName #>)((result >> 8) ^ LookupTable[tableIndex]);
+                }
+                else
+                {
+                    var tableIndex = (int)(((result >> (HashSizeValue - 8)) ^ source[i]) & 0xFF);
+                    result = (global::<#= info.UnderlyingType.FullName #>)((result << 8) ^ LookupTable[tableIndex]);
+                }
+                result &= bitMask;
+            }
+        }
+
+        protected override byte[] HashFinal()
+        {
+            Span<byte> span = stackalloc byte[byteSize];
+            TryHashFinal(span, out _);
+            return span.ToArray();
+        }
+
+        protected override bool TryHashFinal(Span<byte> destination, out int bytesWritten)
+        {
+            if (destination.Length < byteSize)
+            {
+                bytesWritten = 0;
+                return false;
+            }
+           
+            result = (global::<#= info.UnderlyingType.FullName #>)(result & bitMask);
+            if (ReflectInput)
+            {
+                result = CRCUtility.BitReflect(result, HashSizeValue);
+            }
+            if (ReflectOutput)
+            {
+                result = CRCUtility.BitReflect(result, HashSizeValue);
+            }
+            result ^= FinalXorValue;
+
+<# if (info.UnderlyingType == typeof(BigInteger)) { #>
+            return result.TryWriteBytes(destination, out bytesWritten, true, IsBigEndianResult);
+<# } else { #>
+            for (var i = 0; i < byteSize; i++)
+            {
+                if (IsBigEndianResult)
+                {
+                    destination[i] = (byte)(result >> (HashSizeValue - ((i * 8) + 8)));
+                }
+                else
+                {
+                    destination[i] = (byte)(result >> (i * 8));
+                }
+            }
+            bytesWritten = byteSize;
+            return true;
+<# } #>
+        }
+
+        private void LookupTableFill()
+        {
+            var polynomial = ReflectInput ? CRCUtility.BitReflect(Polynomial, HashSizeValue) : Polynomial;
+
+            for (int i = 0; i < LookupTableSize; i++)
+            {
+                lookupTableBuffer[i] = Obtener((byte)(i & 0xFF));
+            }
+
+            global::<#= info.UnderlyingType.FullName #> Obtener(byte position)
+            {
+                global::<#= info.UnderlyingType.FullName #> result;
+                if (ReflectInput)
+                {
+                    result = (global::<#= info.UnderlyingType.FullName #>)position;
+                    for (var i = 0; i < 8; i++)
+                    {
+                        if ((result & 1) == 0)
+                            result = (global::<#= info.UnderlyingType.FullName #>)(result >> 1);
+                        else
+                            result = (global::<#= info.UnderlyingType.FullName #>)((result >> 1) ^ polynomial);
+                        result &= bitMask;
+                    }
+                }
+                else
+                {
+                    global::<#= info.UnderlyingType.FullName #> TopBit = (global::<#= info.UnderlyingType.FullName #>)((global::<#= info.UnderlyingType.FullName #>)1 << (HashSizeValue - 1));
+                    result = (global::<#= info.UnderlyingType.FullName #>)((global::<#= info.UnderlyingType.FullName #>)position << (HashSizeValue - 8));
+                    for (var i = 0; i < 8; i++)
+                    {
+                        if ((result & TopBit) == 0)
+                        {
+                            result = (global::<#= info.UnderlyingType.FullName #>)(result << 1);
+                        }
+                        else
+                        {
+                            result = (global::<#= info.UnderlyingType.FullName #>)((result << 1) ^ polynomial);
+                        }
+                        result &= bitMask;
+                    }
+                }
+                return result;
+            }
+        }
+
+        #region IDisposable
+        private bool disposedValue = false;
+        protected override void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    if (lookupTableBuffer != null)
+                    {
+                        System.Buffers.ArrayPool<global::<#= info.UnderlyingType.FullName #>>.Shared.Return(lookupTableBuffer);
+                    }
+                }
+                disposedValue = true;
+            }
+            base.Dispose(disposing);
+        }
+        #endregion
+    }
+
+<# } #>
+}

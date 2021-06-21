@@ -24,22 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="CRCUtilityTests.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CRCUtilityTests.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="CRCUtilityTests.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>CRCUtilityTests.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
 
 </Project>

@@ -5,9 +5,15 @@ VisualStudioVersion = 16.0.31321.278
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CyclicRedundancyChecks", "CyclicRedundancyChecks\CyclicRedundancyChecks.csproj", "{788B71ED-414B-4D2D-9DC0-6D6C5EB9EAF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CyclicRedundancyChecks.Tests", "CyclicRedundancyChecks.Tests\CyclicRedundancyChecks.Tests.csproj", "{DF12F5D5-1FDE-42E2-89B8-F98BB3AF4EAE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CyclicRedundancyChecks.Tests", "CyclicRedundancyChecks.Tests\CyclicRedundancyChecks.Tests.csproj", "{DF12F5D5-1FDE-42E2-89B8-F98BB3AF4EAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CyclicRedundancyChecks.Run", "CyclicRedundancyChecks.Run\CyclicRedundancyChecks.Run.csproj", "{FE708571-3504-45E0-A35D-02FDC5452647}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CyclicRedundancyChecks.Run", "CyclicRedundancyChecks.Run\CyclicRedundancyChecks.Run.csproj", "{FE708571-3504-45E0-A35D-02FDC5452647}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A001CF21-A284-40EA-86D0-DD4F9C87BBE2}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

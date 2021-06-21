@@ -1,0 +1,39 @@
+﻿<#@ template  debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ Assembly Name="System.Numerics" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #> 
+<#@ import namespace="System.Numerics" #>
+<#@ include file="Header.ttinclude" #>
+using System;
+
+namespace CyclicRedundancyChecks
+{
+<# for (var i = 1; i <= 256; i++) { #>
+<# 
+   (string BaseClassName, Type UnderlyingType) GenerateInfos2 
+       = i <= 8  ? ("CRCUInt8"     , typeof(byte))
+       : i <= 16 ? ("CRCUInt16"    , typeof(ushort))
+       : i <= 32 ? ("CRCUInt32"    , typeof(uint))
+       : i <= 64 ? ("CRCUInt64"    , typeof(ulong))
+       :           ("CRCBigInteger", typeof(BigInteger));
+#>
+    /// <summary>
+    /// 入力データの <see cref="CRC<#= i #>"/> チェックサムを計算します。
+    /// </summary>
+    public class CRC<#= i #> : CyclicRedundancyChecks.Underlying.<#= GenerateInfos2.BaseClassName #>
+    {
+        public CRC<#= i #>(global::<#= GenerateInfos2.UnderlyingType.FullName #> polynomial, global::<#= GenerateInfos2.UnderlyingType.FullName #> initialValue, global::<#= GenerateInfos2.UnderlyingType.FullName #> finalXorValue, bool reflectInput, bool reflectOutput, bool isBigEndianResult = false)
+            : base(<#= i #>, polynomial, initialValue, finalXorValue, reflectInput, reflectOutput, isBigEndianResult)
+        {
+        }
+    }
+
+<# } #>
+}

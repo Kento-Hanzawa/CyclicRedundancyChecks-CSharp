@@ -1,0 +1,47 @@
+﻿<#@ template  debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Xml.dll" #>
+<#@ Assembly Name="System.Xml.Linq.dll" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Xml.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="Header.ttinclude" #>
+<#
+    var CatalogXml = File.ReadAllText(System.IO.Path.GetDirectoryName(this.Host.TemplateFile) + @"\\AlgorithmCatalog.xml");
+    var Catalog = XDocument.Parse(CatalogXml);
+#>
+using System;
+
+namespace CyclicRedundancyChecks
+{
+    partial class CRC
+    {
+        private static bool isRegistered = false;
+
+        /// <summary>
+        /// CRC の実装を <see cref="System.Security.Cryptography.CryptoConfig.AddAlgorithm(Type, string[])"/> を使用して登録します。
+        /// </summary>
+        public static void RegisterAlgorithm()
+        {
+            if (isRegistered) return;
+
+<# foreach (XElement definition in Catalog.Descendants("Definition")) { #>
+<# var name = definition.Attribute("name").Value;
+   var className = name.Replace("-", "_").Replace("/", "_");
+   var alias = new List<string>();
+   alias.Add(name);
+   alias.AddRange(definition.Elements("alias").Select(x => x.Value).Where(x => !string.IsNullOrWhiteSpace(x)));
+#>
+            System.Security.Cryptography.CryptoConfig.AddAlgorithm(typeof(global::CyclicRedundancyChecks.<#= className #>), <#= string.Join(", ", alias.Select(x => '"' + x + '"')) #>);
+<# } #>
+
+            isRegistered = true;
+        }
+    }
+}

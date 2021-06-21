@@ -9,62 +9,53 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="CRC16.cs">
+    <Compile Update="CRCNamed.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>CRC16.tt</DependentUpon>
+      <DependentUpon>CRCNamed.tt</DependentUpon>
     </Compile>
-    <Compile Update="CRC32.cs">
+    <Compile Update="CRCAnyBits.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>CRC32.tt</DependentUpon>
+      <DependentUpon>CRCAnyBits.tt</DependentUpon>
     </Compile>
-    <Compile Update="CRC64.cs">
+    <Compile Update="CRCUnderlying.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>CRC64.tt</DependentUpon>
+      <DependentUpon>CRCUnderlying.tt</DependentUpon>
     </Compile>
-    <Compile Update="CRC8.cs">
+    <Compile Update="Internal\CRCUtility.BitReflect.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>CRC8.tt</DependentUpon>
+      <DependentUpon>CRCUtility.BitReflect.tt</DependentUpon>
     </Compile>
-    <Compile Update="Internal\CRCUtility.cs">
+    <Compile Update="CRC.RegisterAlgorithm.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>CRCUtility.tt</DependentUpon>
-    </Compile>
-    <Compile Update="CRC.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>CRC.tt</DependentUpon>
+      <DependentUpon>CRC.RegisterAlgorithm.tt</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="CRC16.tt">
+    <None Update="CRCNamed.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CRC16.cs</LastGenOutput>
+      <LastGenOutput>CRCNamed.cs</LastGenOutput>
     </None>
-    <None Update="CRC32.tt">
+    <None Update="CRCAnyBits.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CRC32.cs</LastGenOutput>
+      <LastGenOutput>CRCAnyBits.cs</LastGenOutput>
     </None>
-    <None Update="CRC64.tt">
+    <None Update="CRCUnderlying.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CRC64.cs</LastGenOutput>
+      <LastGenOutput>CRCUnderlying.cs</LastGenOutput>
     </None>
-    <None Update="CRC8.tt">
+    <None Update="Internal\CRCUtility.BitReflect.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CRC8.cs</LastGenOutput>
+      <LastGenOutput>CRCUtility.BitReflect.cs</LastGenOutput>
     </None>
-    <None Update="Internal\CRCUtility.tt">
+    <None Update="CRC.RegisterAlgorithm.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CRCUtility.cs</LastGenOutput>
-    </None>
-    <None Update="CRC.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CRC.cs</LastGenOutput>
+      <LastGenOutput>CRC.RegisterAlgorithm.cs</LastGenOutput>
     </None>
   </ItemGroup>
 
