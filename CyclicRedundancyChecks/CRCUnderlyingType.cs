@@ -13,7 +13,7 @@ namespace CyclicRedundancyChecks.Underlying
     /// <summary>
     /// 最大 8 ビットサイズまでの CRC 値を計算する機能を提供します。
     /// </summary>
-    public class CRCUInt8 : CRC
+    public class CRCByte : CRC
     {
         private global::System.Byte result;
         private readonly global::System.Byte bitMask;
@@ -29,7 +29,7 @@ namespace CyclicRedundancyChecks.Underlying
 
         public ReadOnlySpan<global::System.Byte> LookupTable { get { return lookupTableBuffer.AsSpan(0, LookupTableSize); } }
 
-        public CRCUInt8(int bitWidth, global::System.Byte polynomial, global::System.Byte initialValue, global::System.Byte finalXorValue, bool reflectInput, bool reflectOutput, bool isBigEndianResult = false)
+        public CRCByte(int bitWidth, global::System.Byte polynomial, global::System.Byte initialValue, global::System.Byte finalXorValue, bool reflectInput, bool reflectOutput, bool isBigEndianResult = false)
         {
             const int MaxBitWidth = sizeof(global::System.Byte) * 8;
             if (MaxBitWidth < bitWidth)
@@ -78,7 +78,6 @@ namespace CyclicRedundancyChecks.Underlying
                     var tableIndex = (int)(((result >> (HashSizeValue - 8)) ^ source[i]) & 0xFF);
                     result = (global::System.Byte)((result << 8) ^ LookupTable[tableIndex]);
                 }
-                result &= bitMask;
             }
         }
 
@@ -97,7 +96,6 @@ namespace CyclicRedundancyChecks.Underlying
                 return false;
             }
            
-            result = (global::System.Byte)(result & bitMask);
             if (ReflectInput)
             {
                 result = CRCUtility.BitReflect(result, HashSizeValue);
@@ -107,6 +105,7 @@ namespace CyclicRedundancyChecks.Underlying
                 result = CRCUtility.BitReflect(result, HashSizeValue);
             }
             result ^= FinalXorValue;
+            result = (global::System.Byte)(result & bitMask);
 
             for (var i = 0; i < byteSize; i++)
             {
@@ -141,10 +140,13 @@ namespace CyclicRedundancyChecks.Underlying
                     for (var i = 0; i < 8; i++)
                     {
                         if ((result & 1) == 0)
+                        {
                             result = (global::System.Byte)(result >> 1);
+                        }
                         else
+                        {
                             result = (global::System.Byte)((result >> 1) ^ polynomial);
-                        result &= bitMask;
+                        }
                     }
                 }
                 else
@@ -161,7 +163,6 @@ namespace CyclicRedundancyChecks.Underlying
                         {
                             result = (global::System.Byte)((result << 1) ^ polynomial);
                         }
-                        result &= bitMask;
                     }
                 }
                 return result;
@@ -256,7 +257,6 @@ namespace CyclicRedundancyChecks.Underlying
                     var tableIndex = (int)(((result >> (HashSizeValue - 8)) ^ source[i]) & 0xFF);
                     result = (global::System.UInt16)((result << 8) ^ LookupTable[tableIndex]);
                 }
-                result &= bitMask;
             }
         }
 
@@ -275,7 +275,6 @@ namespace CyclicRedundancyChecks.Underlying
                 return false;
             }
            
-            result = (global::System.UInt16)(result & bitMask);
             if (ReflectInput)
             {
                 result = CRCUtility.BitReflect(result, HashSizeValue);
@@ -285,6 +284,7 @@ namespace CyclicRedundancyChecks.Underlying
                 result = CRCUtility.BitReflect(result, HashSizeValue);
             }
             result ^= FinalXorValue;
+            result = (global::System.UInt16)(result & bitMask);
 
             for (var i = 0; i < byteSize; i++)
             {
@@ -319,10 +319,13 @@ namespace CyclicRedundancyChecks.Underlying
                     for (var i = 0; i < 8; i++)
                     {
                         if ((result & 1) == 0)
+                        {
                             result = (global::System.UInt16)(result >> 1);
+                        }
                         else
+                        {
                             result = (global::System.UInt16)((result >> 1) ^ polynomial);
-                        result &= bitMask;
+                        }
                     }
                 }
                 else
@@ -339,7 +342,6 @@ namespace CyclicRedundancyChecks.Underlying
                         {
                             result = (global::System.UInt16)((result << 1) ^ polynomial);
                         }
-                        result &= bitMask;
                     }
                 }
                 return result;
@@ -434,7 +436,6 @@ namespace CyclicRedundancyChecks.Underlying
                     var tableIndex = (int)(((result >> (HashSizeValue - 8)) ^ source[i]) & 0xFF);
                     result = (global::System.UInt32)((result << 8) ^ LookupTable[tableIndex]);
                 }
-                result &= bitMask;
             }
         }
 
@@ -453,7 +454,6 @@ namespace CyclicRedundancyChecks.Underlying
                 return false;
             }
            
-            result = (global::System.UInt32)(result & bitMask);
             if (ReflectInput)
             {
                 result = CRCUtility.BitReflect(result, HashSizeValue);
@@ -463,6 +463,7 @@ namespace CyclicRedundancyChecks.Underlying
                 result = CRCUtility.BitReflect(result, HashSizeValue);
             }
             result ^= FinalXorValue;
+            result = (global::System.UInt32)(result & bitMask);
 
             for (var i = 0; i < byteSize; i++)
             {
@@ -497,10 +498,13 @@ namespace CyclicRedundancyChecks.Underlying
                     for (var i = 0; i < 8; i++)
                     {
                         if ((result & 1) == 0)
+                        {
                             result = (global::System.UInt32)(result >> 1);
+                        }
                         else
+                        {
                             result = (global::System.UInt32)((result >> 1) ^ polynomial);
-                        result &= bitMask;
+                        }
                     }
                 }
                 else
@@ -517,7 +521,6 @@ namespace CyclicRedundancyChecks.Underlying
                         {
                             result = (global::System.UInt32)((result << 1) ^ polynomial);
                         }
-                        result &= bitMask;
                     }
                 }
                 return result;
@@ -612,7 +615,6 @@ namespace CyclicRedundancyChecks.Underlying
                     var tableIndex = (int)(((result >> (HashSizeValue - 8)) ^ source[i]) & 0xFF);
                     result = (global::System.UInt64)((result << 8) ^ LookupTable[tableIndex]);
                 }
-                result &= bitMask;
             }
         }
 
@@ -631,7 +633,6 @@ namespace CyclicRedundancyChecks.Underlying
                 return false;
             }
            
-            result = (global::System.UInt64)(result & bitMask);
             if (ReflectInput)
             {
                 result = CRCUtility.BitReflect(result, HashSizeValue);
@@ -641,6 +642,7 @@ namespace CyclicRedundancyChecks.Underlying
                 result = CRCUtility.BitReflect(result, HashSizeValue);
             }
             result ^= FinalXorValue;
+            result = (global::System.UInt64)(result & bitMask);
 
             for (var i = 0; i < byteSize; i++)
             {
@@ -675,10 +677,13 @@ namespace CyclicRedundancyChecks.Underlying
                     for (var i = 0; i < 8; i++)
                     {
                         if ((result & 1) == 0)
+                        {
                             result = (global::System.UInt64)(result >> 1);
+                        }
                         else
+                        {
                             result = (global::System.UInt64)((result >> 1) ^ polynomial);
-                        result &= bitMask;
+                        }
                     }
                 }
                 else
@@ -695,7 +700,6 @@ namespace CyclicRedundancyChecks.Underlying
                         {
                             result = (global::System.UInt64)((result << 1) ^ polynomial);
                         }
-                        result &= bitMask;
                     }
                 }
                 return result;
@@ -723,7 +727,7 @@ namespace CyclicRedundancyChecks.Underlying
     }
 
     /// <summary>
-    /// 64 ビットサイズ以上の CRC 値を計算する機能を提供します。
+    /// 任意のビットサイズの CRC 値を計算する機能を提供します。
     /// </summary>
     public class CRCBigInteger : CRC
     {
@@ -784,7 +788,6 @@ namespace CyclicRedundancyChecks.Underlying
                     var tableIndex = (int)(((result >> (HashSizeValue - 8)) ^ source[i]) & 0xFF);
                     result = (global::System.Numerics.BigInteger)((result << 8) ^ LookupTable[tableIndex]);
                 }
-                result &= bitMask;
             }
         }
 
@@ -803,7 +806,6 @@ namespace CyclicRedundancyChecks.Underlying
                 return false;
             }
            
-            result = (global::System.Numerics.BigInteger)(result & bitMask);
             if (ReflectInput)
             {
                 result = CRCUtility.BitReflect(result, HashSizeValue);
@@ -813,6 +815,7 @@ namespace CyclicRedundancyChecks.Underlying
                 result = CRCUtility.BitReflect(result, HashSizeValue);
             }
             result ^= FinalXorValue;
+            result = (global::System.Numerics.BigInteger)(result & bitMask);
 
             return result.TryWriteBytes(destination, out bytesWritten, true, IsBigEndianResult);
         }
@@ -835,10 +838,13 @@ namespace CyclicRedundancyChecks.Underlying
                     for (var i = 0; i < 8; i++)
                     {
                         if ((result & 1) == 0)
+                        {
                             result = (global::System.Numerics.BigInteger)(result >> 1);
+                        }
                         else
+                        {
                             result = (global::System.Numerics.BigInteger)((result >> 1) ^ polynomial);
-                        result &= bitMask;
+                        }
                     }
                 }
                 else
@@ -855,7 +861,6 @@ namespace CyclicRedundancyChecks.Underlying
                         {
                             result = (global::System.Numerics.BigInteger)((result << 1) ^ polynomial);
                         }
-                        result &= bitMask;
                     }
                 }
                 return result;

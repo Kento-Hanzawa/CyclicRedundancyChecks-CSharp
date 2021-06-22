@@ -1,0 +1,79 @@
+﻿<#@ IntelliSenseLanguage processor="tangibleT4Editor" language="C#" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Xml.dll" #>
+<#@ Assembly Name="System.Xml.Linq.dll" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Xml.Linq" #>
+<#  AlgorithmCatalog AlgorithmCatalog = AlgorithmCatalog.ReadXml(System.IO.Path.GetDirectoryName(this.Host.TemplateFile) + @"\..\AlgorithmCatalog.xml"); #>
+<#+ 
+    private sealed class AlgorithmCatalog
+    {
+        public IReadOnlyList<AlgorithmDefinition> Definitions { get; }
+
+        public AlgorithmCatalog(XDocument document)
+        {
+            Definitions = document.Descendants("Definition")
+                                  .Select(elm => new AlgorithmDefinition(elm))
+                                  .ToList();
+        }
+
+        public static AlgorithmCatalog ReadXml(string path)
+        {
+            var xdoc = XDocument.Parse(File.ReadAllText(path));
+            return new AlgorithmCatalog(xdoc);
+        }
+    }
+
+    private sealed class AlgorithmDefinition
+    {
+        public string Width   { get; }
+        public string Poly    { get; }
+        public string Init    { get; }
+        public string Refin   { get; }
+        public string Refout  { get; }
+        public string Xorout  { get; }
+        public string Check   { get; }
+        public string Residue { get; }
+        public string Name    { get; }
+        public IReadOnlyList<string> Alias { get; }
+
+        public bool   IsBigCRC         { get { return 64 < int.Parse(Width); } }
+        public string PolyValueOnly    { get { return Poly   .Replace("0x", ""); } }
+        public string InitValueOnly    { get { return Init   .Replace("0x", ""); } }
+        public string XoroutValueOnly  { get { return Xorout .Replace("0x", ""); } }
+        public string CheckValueOnly   { get { return Check  .Replace("0x", ""); } }
+        public string ResidueValueOnly { get { return Residue.Replace("0x", ""); } }
+
+        public string ClassName
+        { 
+            get { return Name.Replace("-", "_").Replace("/", "_"); }
+        }
+        public string InheritClassName
+        {
+            get { return "CRC" + Width; }
+        }
+
+        public AlgorithmDefinition(XElement element)
+        {
+            // IsBigCRC == true (BigIntegerによる実装) を使用する場合、
+            // Poly などの値の先頭に 0 をつけて、パースの際にマイナス値にならないようにします。
+            this.Width   = element.Attribute("width"  ).Value;
+            this.Poly    = (IsBigCRC ? "0" : "") +  element.Attribute("poly"   ).Value;
+            this.Init    = (IsBigCRC ? "0" : "") +  element.Attribute("init"   ).Value;
+            this.Refin   = element.Attribute("refin"  ).Value;
+            this.Refout  = element.Attribute("refout" ).Value;
+            this.Xorout  = (IsBigCRC ? "0" : "") +  element.Attribute("xorout" ).Value;
+            this.Check   = (IsBigCRC ? "0" : "") +  element.Attribute("check"  ).Value;
+            this.Residue = (IsBigCRC ? "0" : "") +  element.Attribute("residue").Value;
+            this.Name    = element.Attribute("name"   ).Value;
+            this.Alias   = element.Elements ("alias"  ).Select(elm => elm.Value)
+                                                       .Where (str => !string.IsNullOrWhiteSpace(str))
+                                                       .ToList();
+        }
+    }
+#>

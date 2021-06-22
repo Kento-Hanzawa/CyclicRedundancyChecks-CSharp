@@ -2,57 +2,46 @@
 <#@ output extension=".cs" #>
 <#@ Assembly Name="System.Core" #>
 <#@ Assembly Name="System.Windows.Forms" #>
-<#@ Assembly Name="System.Numerics" #>
 <#@ import namespace="System" #>
 <#@ import namespace="System.IO" #>
 <#@ import namespace="System.Diagnostics" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Collections" #>
 <#@ import namespace="System.Collections.Generic" #> 
-<#@ import namespace="System.Numerics" #>
-<#@ include file="Header.ttinclude" #>
-<# 
-    var GenerateInfos = new (string ClassName, Type UnderlyingType, int ByteSize, int MaxBitWidth)[]
-    {
-        ("CRCUInt8"     , typeof(Byte)      , sizeof(Byte)  , sizeof(Byte)   * 8),
-        ("CRCUInt16"    , typeof(UInt16)    , sizeof(UInt16), sizeof(UInt16) * 8),
-        ("CRCUInt32"    , typeof(UInt32)    , sizeof(UInt32), sizeof(UInt32) * 8),
-        ("CRCUInt64"    , typeof(UInt64)    , sizeof(UInt64), sizeof(UInt64) * 8),
-        ("CRCBigInteger", typeof(BigInteger),             -1,                 -1),
-    };
-#>
+<#@ include file="T4Includes\Header.ttinclude" #>
+<#@ include file="T4Includes\CRCClassInfo.ttinclude" #>
 using System;
 
 namespace CyclicRedundancyChecks.Underlying
 {
-<# foreach (var info in GenerateInfos) { #>
+<# foreach (IUnderlyingClassInfo info in UnderlyingClassInfo.All()) { #>
     /// <summary>
-<# if (info.UnderlyingType == typeof(BigInteger)) { #>
-    /// 64 ビットサイズ以上の CRC 値を計算する機能を提供します。
+<# if (info.IsBigInteger) { #>
+    /// 任意のビットサイズの CRC 値を計算する機能を提供します。
 <# } else { #>
-    /// 最大 <#= info.MaxBitWidth #> ビットサイズまでの CRC 値を計算する機能を提供します。
+    /// 最大 <#= info.BitSize #> ビットサイズまでの CRC 値を計算する機能を提供します。
 <# } #>
     /// </summary>
     public class <#= info.ClassName #> : CRC
     {
-        private global::<#= info.UnderlyingType.FullName #> result;
-        private readonly global::<#= info.UnderlyingType.FullName #> bitMask;
+        private global::<#= info.Type.FullName #> result;
+        private readonly global::<#= info.Type.FullName #> bitMask;
         private readonly int byteSize;
-        private readonly global::<#= info.UnderlyingType.FullName #>[] lookupTableBuffer;
+        private readonly global::<#= info.Type.FullName #>[] lookupTableBuffer;
 
-        public global::<#= info.UnderlyingType.FullName #> Polynomial { get; }
-        public global::<#= info.UnderlyingType.FullName #> InitialValue { get; }
-        public global::<#= info.UnderlyingType.FullName #> FinalXorValue { get; }
+        public global::<#= info.Type.FullName #> Polynomial { get; }
+        public global::<#= info.Type.FullName #> InitialValue { get; }
+        public global::<#= info.Type.FullName #> FinalXorValue { get; }
         public bool ReflectInput { get; }
         public bool ReflectOutput { get; }
         public bool IsBigEndianResult { get; set; }
 
-        public ReadOnlySpan<global::<#= info.UnderlyingType.FullName #>> LookupTable { get { return lookupTableBuffer.AsSpan(0, LookupTableSize); } }
+        public ReadOnlySpan<global::<#= info.Type.FullName #>> LookupTable { get { return lookupTableBuffer.AsSpan(0, LookupTableSize); } }
 
-        public <#= info.ClassName #>(int bitWidth, global::<#= info.UnderlyingType.FullName #> polynomial, global::<#= info.UnderlyingType.FullName #> initialValue, global::<#= info.UnderlyingType.FullName #> finalXorValue, bool reflectInput, bool reflectOutput, bool isBigEndianResult = false)
+        public <#= info.ClassName #>(int bitWidth, global::<#= info.Type.FullName #> polynomial, global::<#= info.Type.FullName #> initialValue, global::<#= info.Type.FullName #> finalXorValue, bool reflectInput, bool reflectOutput, bool isBigEndianResult = false)
         {
-<# if (info.UnderlyingType != typeof(BigInteger)) { #>
-            const int MaxBitWidth = sizeof(global::<#= info.UnderlyingType.FullName #>) * 8;
+<# if (!info.IsBigInteger) { #>
+            const int MaxBitWidth = sizeof(global::<#= info.Type.FullName #>) * 8;
             if (MaxBitWidth < bitWidth)
             {
                 bitWidth = MaxBitWidth;
@@ -62,14 +51,14 @@ namespace CyclicRedundancyChecks.Underlying
             this.HashSizeValue = bitWidth;
 
             this.result = initialValue;
-<# if (info.UnderlyingType == typeof(BigInteger)) { #>
-            this.bitMask = (global::<#= info.UnderlyingType.FullName #>)(((global::<#= info.UnderlyingType.FullName #>)1 << bitWidth) - 1);
+<# if (info.IsBigInteger) { #>
+            this.bitMask = (global::<#= info.Type.FullName #>)(((global::<#= info.Type.FullName #>)1 << bitWidth) - 1);
             this.byteSize = (HashSizeValue / 8) + (HashSizeValue % 8 == 0 ? 0 : 1);
 <# } else { #>
-            this.bitMask = (bitWidth == MaxBitWidth) ? (global::<#= info.UnderlyingType.FullName #>)0x<#= new string('F', info.ByteSize * 2) #> : (global::<#= info.UnderlyingType.FullName #>)(((global::<#= info.UnderlyingType.FullName #>)1 << bitWidth) - 1);
-            this.byteSize = sizeof(global::<#= info.UnderlyingType.FullName #>);
+            this.bitMask = (bitWidth == MaxBitWidth) ? (global::<#= info.Type.FullName #>)0x<#= new string('F', info.ByteSize * 2) #> : (global::<#= info.Type.FullName #>)(((global::<#= info.Type.FullName #>)1 << bitWidth) - 1);
+            this.byteSize = sizeof(global::<#= info.Type.FullName #>);
 <# } #>
-            this.lookupTableBuffer = System.Buffers.ArrayPool<global::<#= info.UnderlyingType.FullName #>>.Shared.Rent(LookupTableSize);
+            this.lookupTableBuffer = System.Buffers.ArrayPool<global::<#= info.Type.FullName #>>.Shared.Rent(LookupTableSize);
 
             this.Polynomial = polynomial;
             this.InitialValue = initialValue;
@@ -98,14 +87,13 @@ namespace CyclicRedundancyChecks.Underlying
                 if (ReflectInput)
                 {
                     var tableIndex = (int)((result ^ source[i]) & 0xFF);
-                    result = (global::<#= info.UnderlyingType.FullName #>)((result >> 8) ^ LookupTable[tableIndex]);
+                    result = (global::<#= info.Type.FullName #>)((result >> 8) ^ LookupTable[tableIndex]);
                 }
                 else
                 {
                     var tableIndex = (int)(((result >> (HashSizeValue - 8)) ^ source[i]) & 0xFF);
-                    result = (global::<#= info.UnderlyingType.FullName #>)((result << 8) ^ LookupTable[tableIndex]);
+                    result = (global::<#= info.Type.FullName #>)((result << 8) ^ LookupTable[tableIndex]);
                 }
-                result &= bitMask;
             }
         }
 
@@ -124,7 +112,6 @@ namespace CyclicRedundancyChecks.Underlying
                 return false;
             }
            
-            result = (global::<#= info.UnderlyingType.FullName #>)(result & bitMask);
             if (ReflectInput)
             {
                 result = CRCUtility.BitReflect(result, HashSizeValue);
@@ -134,8 +121,9 @@ namespace CyclicRedundancyChecks.Underlying
                 result = CRCUtility.BitReflect(result, HashSizeValue);
             }
             result ^= FinalXorValue;
+            result = (global::<#= info.Type.FullName #>)(result & bitMask);
 
-<# if (info.UnderlyingType == typeof(BigInteger)) { #>
+<# if (info.IsBigInteger) { #>
             return result.TryWriteBytes(destination, out bytesWritten, true, IsBigEndianResult);
 <# } else { #>
             for (var i = 0; i < byteSize; i++)
@@ -163,36 +151,38 @@ namespace CyclicRedundancyChecks.Underlying
                 lookupTableBuffer[i] = Obtener((byte)(i & 0xFF));
             }
 
-            global::<#= info.UnderlyingType.FullName #> Obtener(byte position)
+            global::<#= info.Type.FullName #> Obtener(byte position)
             {
-                global::<#= info.UnderlyingType.FullName #> result;
+                global::<#= info.Type.FullName #> result;
                 if (ReflectInput)
                 {
-                    result = (global::<#= info.UnderlyingType.FullName #>)position;
+                    result = (global::<#= info.Type.FullName #>)position;
                     for (var i = 0; i < 8; i++)
                     {
                         if ((result & 1) == 0)
-                            result = (global::<#= info.UnderlyingType.FullName #>)(result >> 1);
+                        {
+                            result = (global::<#= info.Type.FullName #>)(result >> 1);
+                        }
                         else
-                            result = (global::<#= info.UnderlyingType.FullName #>)((result >> 1) ^ polynomial);
-                        result &= bitMask;
+                        {
+                            result = (global::<#= info.Type.FullName #>)((result >> 1) ^ polynomial);
+                        }
                     }
                 }
                 else
                 {
-                    global::<#= info.UnderlyingType.FullName #> TopBit = (global::<#= info.UnderlyingType.FullName #>)((global::<#= info.UnderlyingType.FullName #>)1 << (HashSizeValue - 1));
-                    result = (global::<#= info.UnderlyingType.FullName #>)((global::<#= info.UnderlyingType.FullName #>)position << (HashSizeValue - 8));
+                    global::<#= info.Type.FullName #> TopBit = (global::<#= info.Type.FullName #>)((global::<#= info.Type.FullName #>)1 << (HashSizeValue - 1));
+                    result = (global::<#= info.Type.FullName #>)((global::<#= info.Type.FullName #>)position << (HashSizeValue - 8));
                     for (var i = 0; i < 8; i++)
                     {
                         if ((result & TopBit) == 0)
                         {
-                            result = (global::<#= info.UnderlyingType.FullName #>)(result << 1);
+                            result = (global::<#= info.Type.FullName #>)(result << 1);
                         }
                         else
                         {
-                            result = (global::<#= info.UnderlyingType.FullName #>)((result << 1) ^ polynomial);
+                            result = (global::<#= info.Type.FullName #>)((result << 1) ^ polynomial);
                         }
-                        result &= bitMask;
                     }
                 }
                 return result;
@@ -209,7 +199,7 @@ namespace CyclicRedundancyChecks.Underlying
                 {
                     if (lookupTableBuffer != null)
                     {
-                        System.Buffers.ArrayPool<global::<#= info.UnderlyingType.FullName #>>.Shared.Return(lookupTableBuffer);
+                        System.Buffers.ArrayPool<global::<#= info.Type.FullName #>>.Shared.Return(lookupTableBuffer);
                     }
                 }
                 disposedValue = true;

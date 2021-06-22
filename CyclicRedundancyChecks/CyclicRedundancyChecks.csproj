@@ -9,20 +9,20 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="CRCNamed.cs">
+    <Compile Update="CRCFromCatalog.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>CRCNamed.tt</DependentUpon>
+      <DependentUpon>CRCFromCatalog.tt</DependentUpon>
     </Compile>
     <Compile Update="CRCAnyBits.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>CRCAnyBits.tt</DependentUpon>
     </Compile>
-    <Compile Update="CRCUnderlying.cs">
+    <Compile Update="CRCUnderlyingType.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>CRCUnderlying.tt</DependentUpon>
+      <DependentUpon>CRCUnderlyingType.tt</DependentUpon>
     </Compile>
     <Compile Update="Internal\CRCUtility.BitReflect.cs">
       <DesignTime>True</DesignTime>
@@ -37,17 +37,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="CRCNamed.tt">
+    <None Update="CRCFromCatalog.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CRCNamed.cs</LastGenOutput>
+      <LastGenOutput>CRCFromCatalog.cs</LastGenOutput>
     </None>
     <None Update="CRCAnyBits.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>CRCAnyBits.cs</LastGenOutput>
     </None>
-    <None Update="CRCUnderlying.tt">
+    <None Update="CRCUnderlyingType.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CRCUnderlying.cs</LastGenOutput>
+      <LastGenOutput>CRCUnderlyingType.cs</LastGenOutput>
     </None>
     <None Update="Internal\CRCUtility.BitReflect.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
