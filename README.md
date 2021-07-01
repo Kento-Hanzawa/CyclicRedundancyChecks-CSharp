@@ -37,6 +37,9 @@ void Main()
 | `reflectInput` | CRC計算時に入力データのビット順反映をするかどうか。  |
 | `reflectOutput` | CRC計算の最後にビット順反映をするかどうか。 |
 
+現在は `CRC1` ～ 'CRC256' までサポートしています。
+ただし、`CRC65` 以上は `BigInteger` 型を使用するため、パフォーマンスが著しく低下します。
+
 ## もっと簡易的に使いたい
 このライブラリでは [`Catalogue of parametrised CRC algorithms`](https://reveng.sourceforge.io/crc-catalogue/) ページに記載されている全 `CRC` の既定実装クラスが用意されています。
 これらのクラスは `CyclicRedundancyChecks.Catalogs` 名前空間内に配置されています。
