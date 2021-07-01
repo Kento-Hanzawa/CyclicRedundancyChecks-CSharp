@@ -9,7 +9,7 @@ using System;
 using System.Globalization;
 using System.Numerics;
 
-namespace CyclicRedundancyChecks
+namespace CyclicRedundancyChecks.Catalogs
 {
     /// <summary>
     /// <para>入力データの CRC-3/GSM ハッシュを計算します。</para>

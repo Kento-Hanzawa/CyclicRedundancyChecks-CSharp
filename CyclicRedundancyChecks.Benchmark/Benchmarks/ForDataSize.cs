@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BenchmarkDotNet.Attributes;
+using CyclicRedundancyChecks.Catalogs;
 
 namespace CyclicRedundancyChecks.Benchmark.Benchmarks
 {

@@ -12,6 +12,7 @@ using System.IO;
 using System.Numerics;
 using System.Text;
 using Xunit;
+using CyclicRedundancyChecks.Catalogs;
 
 namespace CyclicRedundancyChecks.Tests
 {

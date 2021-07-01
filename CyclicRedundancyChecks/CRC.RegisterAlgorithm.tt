@@ -13,6 +13,7 @@
 <#@ include file="T4Includes\CRCClassInfo.ttinclude" #>
 using System;
 using System.Security.Cryptography;
+using CyclicRedundancyChecks.Catalogs;
 
 namespace CyclicRedundancyChecks
 {

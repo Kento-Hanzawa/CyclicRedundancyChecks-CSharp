@@ -8,6 +8,7 @@
 
 using System;
 using System.Security.Cryptography;
+using CyclicRedundancyChecks.Catalogs;
 
 namespace CyclicRedundancyChecks
 {
