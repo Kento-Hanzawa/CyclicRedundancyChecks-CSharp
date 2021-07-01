@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <ItemGroup>
@@ -9,25 +14,20 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="CRCFromCatalog.cs">
+    <Compile Update="CRC_Catalog.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>CRCFromCatalog.tt</DependentUpon>
+      <DependentUpon>CRC_Catalog.tt</DependentUpon>
     </Compile>
-    <Compile Update="CRCAnyBits.cs">
+    <Compile Update="CRC_Bits.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>CRCAnyBits.tt</DependentUpon>
+      <DependentUpon>CRC_Bits.tt</DependentUpon>
     </Compile>
-    <Compile Update="CRCUnderlyingType.cs">
+    <Compile Update="CRC_UnderlyingTypes.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>CRCUnderlyingType.tt</DependentUpon>
-    </Compile>
-    <Compile Update="Internal\CRCUtility.BitReflect.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>CRCUtility.BitReflect.tt</DependentUpon>
+      <DependentUpon>CRC_UnderlyingTypes.tt</DependentUpon>
     </Compile>
     <Compile Update="CRC.RegisterAlgorithm.cs">
       <DesignTime>True</DesignTime>
@@ -37,21 +37,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="CRCFromCatalog.tt">
+    <None Update="CRC_Catalog.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CRCFromCatalog.cs</LastGenOutput>
+      <LastGenOutput>CRC_Catalog.cs</LastGenOutput>
     </None>
-    <None Update="CRCAnyBits.tt">
+    <None Update="CRC_Bits.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CRCAnyBits.cs</LastGenOutput>
+      <LastGenOutput>CRC_Bits.cs</LastGenOutput>
     </None>
-    <None Update="CRCUnderlyingType.tt">
+    <None Update="CRC_UnderlyingTypes.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CRCUnderlyingType.cs</LastGenOutput>
-    </None>
-    <None Update="Internal\CRCUtility.BitReflect.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CRCUtility.BitReflect.cs</LastGenOutput>
+      <LastGenOutput>CRC_UnderlyingTypes.cs</LastGenOutput>
     </None>
     <None Update="CRC.RegisterAlgorithm.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

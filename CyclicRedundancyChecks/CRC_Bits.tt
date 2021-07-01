@@ -1,0 +1,47 @@
+﻿<#@ template  debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ Assembly Name="System.Numerics" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #> 
+<#@ import namespace="System.Numerics" #>
+<#@ include file="T4Includes\Header.ttinclude" #>
+<#@ include file="T4Includes\CRCClassInfo.ttinclude" #>
+using System;
+using CyclicRedundancyChecks.UnderlyingTypes;
+
+namespace CyclicRedundancyChecks
+{
+<# foreach (BitClassInfo info in BitClassInfo.All()) { #>
+    /// <summary>
+    /// 入力データの <see cref="<#= info.ClassName #>"/> チェックサムを計算します。
+    /// </summary>
+    public class <#= info.ClassName #> : <#= info.InheritClassInfo.ClassName #>
+    {
+        /// <summary>
+        /// <see cref="<#= info.ClassName #>"/> クラスの新しいインスタンスを作成します。
+        /// </summary>
+        /// <param name="polynomial">CRC計算に使用する生成多項式。</param>
+        /// <param name="initialValue">CRCの初期値。</param>
+        /// <param name="finalXorValue">CRC計算の最後におこなう XOR 演算で使用する値。</param>
+        /// <param name="reflectInput">CRC計算時に入力データのビット順反映をするかどうか。反映する場合は <see langword="true"/>、反映しない場合は <see langword="false"/>。</param>
+        /// <param name="reflectOutput">CRC計算の最後にビット順反映をするかどうか。反映する場合は <see langword="true"/>、反映しない場合は <see langword="false"/>。</param>
+        /// <param name="isLookupTable">
+        /// 計算用テーブルを使用する場合は <see langword="true"/>、使用しない場合は <see langword="false"/> を指定します。
+        /// 使用する場合、事前に全 Byte ビットパターン (255) の計算テーブルを生成し、CRC 計算時の手順をいくつかスキップすることでパフォーマンスが向上する場合があります。
+        /// しかし、テーブル生成にはコストが発生するので、インプットデータサイズが合計 255 バイト以下の場合は、テーブルを使用しない方がパフォーマンスが向上する可能性が高くなります。
+        /// </param>
+        /// <param name="isBigEndianResult">計算結果のCRC値をビッグエンディアン順に <see cref="byte"/> 配列に格納する場合は <see langword="true"/>、リトルエンディアン順に格納する場合は <see langword="false"/> を指定します。</param>
+        public <#= info.ClassName #>(global::<#= info.InheritClassInfo.Type.FullName #> polynomial, global::<#= info.InheritClassInfo.Type.FullName #> initialValue, global::<#= info.InheritClassInfo.Type.FullName #> finalXorValue, bool reflectInput, bool reflectOutput, bool isLookupTable = true, bool isBigEndianResult = false)
+            : base(<#= info.BitWidth #>, polynomial, initialValue, finalXorValue, reflectInput, reflectOutput, isLookupTable, isBigEndianResult)
+        {
+        }
+    }
+
+<# } #>
+}

@@ -22,7 +22,6 @@ namespace CyclicRedundancyChecks
         {
             if (isRegistered) return;
 
-#if false
             // ハイフンなどの区切りが無い名前は、ビット幅別のクラスとして登録します。
             // これはカタログに記載されているアルゴリズムと区別させるためです。
             CryptoConfig.AddAlgorithm(typeof(CRC1), "CRC1");
@@ -390,7 +389,6 @@ namespace CyclicRedundancyChecks
             CryptoConfig.AddAlgorithm(typeof(CRC_64_WE), "CRC-64/WE");
             CryptoConfig.AddAlgorithm(typeof(CRC_64_XZ), "CRC-64/XZ", "CRC-64/GO-ECMA");
             CryptoConfig.AddAlgorithm(typeof(CRC_82_DARC), "CRC-82/DARC");
-#endif
 
             isRegistered = true;
         }

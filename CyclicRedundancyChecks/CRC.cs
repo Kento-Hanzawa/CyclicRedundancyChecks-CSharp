@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 
 [assembly: InternalsVisibleTo("CyclicRedundancyChecks.Run")]
 [assembly: InternalsVisibleTo("CyclicRedundancyChecks.Tests")]
+[assembly: InternalsVisibleTo("CyclicRedundancyChecks.Benchmark")]
 namespace CyclicRedundancyChecks
 {
     /// <summary>

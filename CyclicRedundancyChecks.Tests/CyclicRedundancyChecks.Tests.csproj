@@ -28,17 +28,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="CRCFromCatalogTests.cs">
+    <Compile Update="CatalogTests.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>CRCFromCatalogTests.tt</DependentUpon>
+      <DependentUpon>CatalogTests.tt</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="CRCFromCatalogTests.tt">
+    <None Update="CatalogTests.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CRCFromCatalogTests.cs</LastGenOutput>
+      <LastGenOutput>CatalogTests.cs</LastGenOutput>
     </None>
   </ItemGroup>
 

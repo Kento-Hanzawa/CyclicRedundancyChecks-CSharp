@@ -104,14 +104,17 @@
             if (bitWidth <= 8)
             {
                 this.InheritClassInfo = UnderlyingClassInfo.Byte;
+                //this.InheritClassInfo = UnderlyingClassInfo.UInt32;
             }
             else if (bitWidth <= 16)
             {
                 this.InheritClassInfo = UnderlyingClassInfo.UInt16;
+                //this.InheritClassInfo = UnderlyingClassInfo.UInt32;
             }
             else if (bitWidth <= 32)
             {
                 this.InheritClassInfo = UnderlyingClassInfo.UInt32;
+                //this.InheritClassInfo = UnderlyingClassInfo.UInt32;
             }
             else if (bitWidth <= 64)
             {

@@ -27,7 +27,6 @@ namespace CyclicRedundancyChecks
         {
             if (isRegistered) return;
 
-#if false
             // ハイフンなどの区切りが無い名前は、ビット幅別のクラスとして登録します。
             // これはカタログに記載されているアルゴリズムと区別させるためです。
 <# foreach (BitClassInfo info in BitClassInfo.All()) { #>
@@ -43,7 +42,6 @@ namespace CyclicRedundancyChecks
 #>
             CryptoConfig.AddAlgorithm(typeof(<#= definition.ClassName #>), <#= string.Join(", ", names.Select(x => '"' + x + '"')) #>);
 <# } #>
-#endif
 
             isRegistered = true;
         }

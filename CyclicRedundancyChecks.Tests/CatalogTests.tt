@@ -1,0 +1,119 @@
+﻿<#@ template  debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="..\CyclicRedundancyChecks\T4Includes\Header.ttinclude" #>
+<#@ include file="..\CyclicRedundancyChecks\T4Includes\AlgorithmCatalog.ttinclude" #>
+using System;
+using System.Buffers;
+using System.Globalization;
+using System.IO;
+using System.Numerics;
+using System.Text;
+using Xunit;
+
+namespace CyclicRedundancyChecks.Tests
+{
+    public class CatalogTests
+    {
+        private static readonly byte[] TestData = Encoding.ASCII.GetBytes("123456789");
+
+        #region ComputeHash()
+
+<# foreach (AlgorithmDefinition definition in AlgorithmCatalog.Definitions) { #>
+        [Fact]
+        public void <#= definition.ClassName #>_NotTable_ComputeHash()
+        {
+            var expected = "0x" + BigInteger.Parse("0<#= definition.CheckValueOnly #>", NumberStyles.AllowHexSpecifier).ToString("x<#= (int.Parse(definition.Width) / 4) + ((int.Parse(definition.Width) % 4 == 0 ? 0 : 1)) #>");
+            using (var algorithm = new <#= definition.ClassName #>(isLookupTable: false))
+            {
+                var hash = algorithm.ComputeHash(TestData);
+                var actual = "0x" + new BigInteger(hash, isUnsigned: true).ToString("x<#= (int.Parse(definition.Width) / 4) + ((int.Parse(definition.Width) % 4 == 0 ? 0 : 1)) #>");
+                Assert.Equal(expected, actual);
+            }
+        }
+
+        [Fact]
+        public void <#= definition.ClassName #>_UseTable_ComputeHash()
+        {
+            var expected = "0x" + BigInteger.Parse("0<#= definition.CheckValueOnly #>", NumberStyles.AllowHexSpecifier).ToString("x<#= (int.Parse(definition.Width) / 4) + ((int.Parse(definition.Width) % 4 == 0 ? 0 : 1)) #>");
+            using (var algorithm = new <#= definition.ClassName #>(isLookupTable: true))
+            {
+                var hash = algorithm.ComputeHash(TestData);
+                var actual = "0x" + new BigInteger(hash, isUnsigned: true).ToString("x<#= (int.Parse(definition.Width) / 4) + ((int.Parse(definition.Width) % 4 == 0 ? 0 : 1)) #>");
+                Assert.Equal(expected, actual);
+            }
+        }
+
+<# } #>
+
+        #endregion
+
+        #region TransformBlock()
+
+<# foreach (AlgorithmDefinition definition in AlgorithmCatalog.Definitions) { #>
+        [Fact]
+        public void <#= definition.ClassName #>_NotTable_TransformBlock()
+        {
+            var expected = "0x" + BigInteger.Parse("0<#= definition.CheckValueOnly #>", NumberStyles.AllowHexSpecifier).ToString("x<#= (int.Parse(definition.Width) / 4) + ((int.Parse(definition.Width) % 4 == 0 ? 0 : 1)) #>");
+            using (var algorithm = new <#= definition.ClassName #>(isLookupTable: false))
+            using (var stream = new MemoryStream(TestData))
+            {
+                var buffer = ArrayPool<byte>.Shared.Rent(1);
+                try
+                {
+                    Span<byte> span = buffer.AsSpan(0, 1);
+                    var readSize = 0;
+                    while (0 < (readSize = stream.Read(span)))
+                    {
+                        algorithm.TransformBlock(buffer, 0, readSize, null, 0);
+                    }
+                    algorithm.TransformFinalBlock(buffer, 0, readSize);
+                    var actual = "0x" + new BigInteger(algorithm.Hash, isUnsigned: true).ToString("x<#= (int.Parse(definition.Width) / 4) + ((int.Parse(definition.Width) % 4 == 0 ? 0 : 1)) #>");
+                    Assert.Equal(expected, actual);
+                }
+                finally
+                {
+                    ArrayPool<byte>.Shared.Return(buffer);
+                }
+            }
+        }
+
+        [Fact]
+        public void <#= definition.ClassName #>_UseTable_TransformBlock()
+        {
+            var expected = "0x" + BigInteger.Parse("0<#= definition.CheckValueOnly #>", NumberStyles.AllowHexSpecifier).ToString("x<#= (int.Parse(definition.Width) / 4) + ((int.Parse(definition.Width) % 4 == 0 ? 0 : 1)) #>");
+            using (var algorithm = new <#= definition.ClassName #>(isLookupTable: true))
+            using (var stream = new MemoryStream(TestData))
+            {
+                var buffer = ArrayPool<byte>.Shared.Rent(1);
+                try
+                {
+                    Span<byte> span = buffer.AsSpan(0, 1);
+                    var readSize = 0;
+                    while (0 < (readSize = stream.Read(span)))
+                    {
+                        algorithm.TransformBlock(buffer, 0, readSize, null, 0);
+                    }
+                    algorithm.TransformFinalBlock(buffer, 0, readSize);
+                    var actual = "0x" + new BigInteger(algorithm.Hash, isUnsigned: true).ToString("x<#= (int.Parse(definition.Width) / 4) + ((int.Parse(definition.Width) % 4 == 0 ? 0 : 1)) #>");
+                    Assert.Equal(expected, actual);
+                }
+                finally
+                {
+                    ArrayPool<byte>.Shared.Return(buffer);
+                }
+            }
+        }
+
+<# } #>
+
+        #endregion
+    }
+}

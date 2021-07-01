@@ -2,6 +2,7 @@
 <#@ Assembly Name="System.Core" #>
 <#@ Assembly Name="System.Xml.dll" #>
 <#@ Assembly Name="System.Xml.Linq.dll" #>
+<#@ Assembly Name="System.Numerics" #>
 <#@ import namespace="System" #>
 <#@ import namespace="System.Collections" #>
 <#@ import namespace="System.Collections.Generic" #>
@@ -9,6 +10,7 @@
 <#@ import namespace="System.IO" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Xml.Linq" #>
+<#@ import namespace="System.Numerics" #>
 <#  AlgorithmCatalog AlgorithmCatalog = AlgorithmCatalog.ReadXml(System.IO.Path.GetDirectoryName(this.Host.TemplateFile) + @"\..\AlgorithmCatalog.xml"); #>
 <#+ 
     private sealed class AlgorithmCatalog
@@ -49,6 +51,19 @@
         public string CheckValueOnly   { get { return Check  .Replace("0x", ""); } }
         public string ResidueValueOnly { get { return Residue.Replace("0x", ""); } }
 
+        public Type   UnderlyingType
+        {
+            get
+            {
+                var width = int.Parse(Width);
+                if (width <= 8) return typeof(byte);
+                if (width <= 16) return typeof(ushort);
+                if (width <= 32) return typeof(uint);
+                if (width <= 64) return typeof(ulong);
+                return typeof(BigInteger);
+            }
+        }
+
         public string ClassName
         { 
             get { return Name.Replace("-", "_").Replace("/", "_"); }
@@ -60,16 +75,15 @@
 
         public AlgorithmDefinition(XElement element)
         {
-            // IsBigCRC == true (BigIntegerによる実装) を使用する場合、
-            // Poly などの値の先頭に 0 をつけて、パースの際にマイナス値にならないようにします。
+            // Poly などの値の先頭に 0 をつけて、BigInteger.Parse() の際などにマイナス値にならないようにします。
             this.Width   = element.Attribute("width"  ).Value;
-            this.Poly    = (IsBigCRC ? "0" : "") +  element.Attribute("poly"   ).Value;
-            this.Init    = (IsBigCRC ? "0" : "") +  element.Attribute("init"   ).Value;
+            this.Poly    = element.Attribute("poly"   ).Value.Insert(2, "0");
+            this.Init    = element.Attribute("init"   ).Value.Insert(2, "0");
             this.Refin   = element.Attribute("refin"  ).Value;
             this.Refout  = element.Attribute("refout" ).Value;
-            this.Xorout  = (IsBigCRC ? "0" : "") +  element.Attribute("xorout" ).Value;
-            this.Check   = (IsBigCRC ? "0" : "") +  element.Attribute("check"  ).Value;
-            this.Residue = (IsBigCRC ? "0" : "") +  element.Attribute("residue").Value;
+            this.Xorout  = element.Attribute("xorout" ).Value.Insert(2, "0");
+            this.Check   = element.Attribute("check"  ).Value.Insert(2, "0");
+            this.Residue = element.Attribute("residue").Value.Insert(2, "0");
             this.Name    = element.Attribute("name"   ).Value;
             this.Alias   = element.Elements ("alias"  ).Select(elm => elm.Value)
                                                        .Where (str => !string.IsNullOrWhiteSpace(str))
