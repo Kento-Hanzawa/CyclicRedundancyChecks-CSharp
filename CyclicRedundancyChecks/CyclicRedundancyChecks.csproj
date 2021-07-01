@@ -14,10 +14,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="CRC_Catalog.cs">
+    <Compile Update="CRC_Catalogs.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>CRC_Catalog.tt</DependentUpon>
+      <DependentUpon>CRC_Catalogs.tt</DependentUpon>
     </Compile>
     <Compile Update="CRC_Bits.cs">
       <DesignTime>True</DesignTime>
@@ -37,9 +37,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="CRC_Catalog.tt">
+    <None Update="CRC_Catalogs.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CRC_Catalog.cs</LastGenOutput>
+      <LastGenOutput>CRC_Catalogs.cs</LastGenOutput>
     </None>
     <None Update="CRC_Bits.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
