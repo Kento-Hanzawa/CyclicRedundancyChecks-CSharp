@@ -1,0 +1,50 @@
+﻿<#@ template  debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="T4Includes\Header.ttinclude" #>
+<#@ include file="T4Includes\AlgorithmCatalog.ttinclude" #>
+<#@ include file="T4Includes\CRCClassInfo.ttinclude" #>
+using System;
+using System.Security.Cryptography;
+using CyclicRedundancyChecks.Catalogs;
+
+namespace CyclicRedundancyChecks
+{
+    partial class CRC
+    {
+        private static bool isRegistered = false;
+
+        /// <summary>
+        /// CRC の実装を <see cref="CryptoConfig.AddAlgorithm(Type, string[])"/> を使用して登録します。
+        /// </summary>
+        public static void RegisterAlgorithm()
+        {
+            if (isRegistered) return;
+
+            // ハイフンなどの区切りが無い名前は、ビット幅別のクラスとして登録します。
+            // これはカタログに記載されているアルゴリズムと区別させるためです。
+<# foreach (BitClassInfo info in BitClassInfo.All()) { #>
+            CryptoConfig.AddAlgorithm(typeof(<#= info.ClassName #>), "<#= info.ClassName #>");
+<# } #>
+
+            // カタログ記載のアルゴリズム。
+<# foreach (var definition in AlgorithmCatalog.Definitions) { #>
+<#
+   var names = new List<string>();
+   names.Add(definition.Name);
+   names.AddRange(definition.Alias);
+#>
+            CryptoConfig.AddAlgorithm(typeof(<#= definition.ClassName #>), <#= string.Join(", ", names.Select(x => '"' + x + '"')) #>);
+<# } #>
+
+            isRegistered = true;
+        }
+    }
+}

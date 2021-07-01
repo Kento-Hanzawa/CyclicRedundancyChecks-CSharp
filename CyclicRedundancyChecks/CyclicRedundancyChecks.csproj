@@ -1,0 +1,58 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="CRC_Catalogs.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CRC_Catalogs.tt</DependentUpon>
+    </Compile>
+    <Compile Update="CRC_Bits.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CRC_Bits.tt</DependentUpon>
+    </Compile>
+    <Compile Update="CRC_UnderlyingTypes.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CRC_UnderlyingTypes.tt</DependentUpon>
+    </Compile>
+    <Compile Update="CRC.RegisterAlgorithm.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CRC.RegisterAlgorithm.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="CRC_Catalogs.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CRC_Catalogs.cs</LastGenOutput>
+    </None>
+    <None Update="CRC_Bits.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CRC_Bits.cs</LastGenOutput>
+    </None>
+    <None Update="CRC_UnderlyingTypes.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CRC_UnderlyingTypes.cs</LastGenOutput>
+    </None>
+    <None Update="CRC.RegisterAlgorithm.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CRC.RegisterAlgorithm.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+</Project>
