@@ -1,4 +1,4 @@
-[![Build Status](https://dev.azure.com/k-hanzawa/CyclicRedundancyChecks-CSharp/_apis/build/status/Kento-Hanzawa.CyclicRedundancyChecks-CSharp?branchName=main)](https://dev.azure.com/k-hanzawa/CyclicRedundancyChecks-CSharp/_build/latest?definitionId=7&branchName=main)
+[![Build Status](https://dev.azure.com/k-hanzawa/CyclicRedundancyChecks-CSharp/_apis/build/status/Kento-Hanzawa.CyclicRedundancyChecks-CSharp?branchName=main)](https://dev.azure.com/k-hanzawa/CyclicRedundancyChecks-CSharp/_build/latest?definitionId=8&branchName=main)
 
 # CyclicRedundancyChecks for .NET
 CRC (Cyclic Redundancy Checks) の C# 実装です。
