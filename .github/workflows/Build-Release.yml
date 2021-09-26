@@ -1,0 +1,61 @@
+name: Build-Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "tag: git tag you want create. (ex. '1.0.0')"
+        required: true
+      dry_run:
+        description: "dry_run: true will never create release/nuget."
+        required: true
+        default: "false"
+
+env:
+  INPUT_TAG: ${{ github.event.inputs.tag }}
+  INPUT_DRY_RUN: ${{ github.event.inputs.dry_run }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '5.0.x'
+    - run: dotnet restore
+    - run: dotnet build --configuration Release --no-restore  -p:Version=${{ env.INPUT_TAG }}
+    - run: dotnet test  --configuration Release --no-build   
+    - run: dotnet pack "./CyclicRedundancyChecks/CyclicRedundancyChecks.csproj" --configuration Release --no-build -p:Version=${{ env.INPUT_TAG }} -o "./publish"
+    - uses: actions/upload-artifact@v2
+      with:
+        name: nuget
+        path: ./publish
+        
+  create-release:
+    if: github.event.inputs.dry_run == 'false'
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - run: git tag ${{ env.INPUT_TAG }}
+      - uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+          tags: true
+        
+      - uses: actions/create-release@v1
+        id: create_release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.INPUT_TAG }}
+          release_name: Ver.${{ env.INPUT_TAG }}
+          draft: true
+          prerelease: false
+      
+      - uses: actions/download-artifact@v2
+      - run: dotnet nuget push "./nuget/*.nupkg" --skip-duplicate --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_KEY }}
+      

@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CyclicRedundancyChecks", "C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CyclicRedundancyChecks.Tests", "CyclicRedundancyChecks.Tests\CyclicRedundancyChecks.Tests.csproj", "{DF12F5D5-1FDE-42E2-89B8-F98BB3AF4EAE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CyclicRedundancyChecks.Run", "CyclicRedundancyChecks.Run\CyclicRedundancyChecks.Run.csproj", "{FE708571-3504-45E0-A35D-02FDC5452647}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A001CF21-A284-40EA-86D0-DD4F9C87BBE2}"
 	ProjectSection(SolutionItems) = preProject
 		AlgorithmCatalog.xml = AlgorithmCatalog.xml
@@ -16,7 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CyclicRedundancyChecks.Benchmark", "CyclicRedundancyChecks.Benchmark\CyclicRedundancyChecks.Benchmark.csproj", "{066F803B-AF21-4A40-A050-0C2361F31482}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CyclicRedundancyChecks.Benchmark", "CyclicRedundancyChecks.Benchmark\CyclicRedundancyChecks.Benchmark.csproj", "{066F803B-AF21-4A40-A050-0C2361F31482}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,10 +30,6 @@ Global
 		{DF12F5D5-1FDE-42E2-89B8-F98BB3AF4EAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF12F5D5-1FDE-42E2-89B8-F98BB3AF4EAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF12F5D5-1FDE-42E2-89B8-F98BB3AF4EAE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FE708571-3504-45E0-A35D-02FDC5452647}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FE708571-3504-45E0-A35D-02FDC5452647}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FE708571-3504-45E0-A35D-02FDC5452647}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FE708571-3504-45E0-A35D-02FDC5452647}.Release|Any CPU.Build.0 = Release|Any CPU
 		{066F803B-AF21-4A40-A050-0C2361F31482}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{066F803B-AF21-4A40-A050-0C2361F31482}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{066F803B-AF21-4A40-A050-0C2361F31482}.Release|Any CPU.ActiveCfg = Release|Any CPU
