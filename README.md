@@ -1,7 +1,10 @@
-# CyclicRedundancyChecks for .NET
+CyclicRedundancyChecks for .NET
+===
 
-[![NuGet](https://img.shields.io/nuget/v/CyclicRedundancyChecks.svg)](https://www.nuget.org/packages/CyclicRedundancyChecks)
+[![GitHub Actions](https://github.com/Kento-Hanzawa/CyclicRedundancyChecks-CSharp/workflows/Build-Debug/badge.svg)](https://github.com/Kento-Hanzawa/CyclicRedundancyChecks-CSharp/actions)
 [![Build Status](https://dev.azure.com/k-hanzawa/CyclicRedundancyChecks-CSharp/_apis/build/status/Kento-Hanzawa.CyclicRedundancyChecks-CSharp?branchName=main)](https://dev.azure.com/k-hanzawa/CyclicRedundancyChecks-CSharp/_build/latest?definitionId=8&branchName=main)
+[![NuGet](https://img.shields.io/nuget/v/CyclicRedundancyChecks.svg)](https://www.nuget.org/packages/CyclicRedundancyChecks)
+
 
 CRC (Cyclic Redundancy Checks) の C# 実装です。
 個人的に何かと CRC を使う機会が多かったので、せっかくなのでライブラリとして作成してみました。
