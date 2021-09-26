@@ -57,5 +57,5 @@ jobs:
           prerelease: false
       
       - uses: actions/download-artifact@v2
-      - run: dotnet nuget push "./nuget/*.nupkg" --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_KEY }}
+      - run: dotnet nuget push "./nuget/*.nupkg" --skip-duplicate --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_KEY }}
       
