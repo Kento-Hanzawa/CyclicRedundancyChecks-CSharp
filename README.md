@@ -3,6 +3,7 @@ CyclicRedundancyChecks for .NET
 
 [![GitHub Actions](https://github.com/Kento-Hanzawa/CyclicRedundancyChecks-CSharp/workflows/Build-Debug/badge.svg)](https://github.com/Kento-Hanzawa/CyclicRedundancyChecks-CSharp/actions)
 [![Build Status](https://dev.azure.com/k-hanzawa/CyclicRedundancyChecks-CSharp/_apis/build/status/Kento-Hanzawa.CyclicRedundancyChecks-CSharp?branchName=main)](https://dev.azure.com/k-hanzawa/CyclicRedundancyChecks-CSharp/_build/latest?definitionId=8&branchName=main)
+[![Releases](https://img.shields.io/github/release/Kento-Hanzawa/CyclicRedundancyChecks-CSharp.svg)](https://github.com/Kento-Hanzawa/CyclicRedundancyChecks-CSharp/releases)
 [![NuGet](https://img.shields.io/nuget/v/CyclicRedundancyChecks.svg)](https://www.nuget.org/packages/CyclicRedundancyChecks)
 
 
