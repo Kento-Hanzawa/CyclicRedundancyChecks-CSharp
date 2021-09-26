@@ -6,7 +6,7 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <RepositoryUrl>https://github.com/Kento-Hanzawa/CyclicRedundancyChecks-CSharp.git</RepositoryUrl>
-    <PackageReleaseNotes>1.0.0: 公開。</PackageReleaseNotes>
+    <PackageReleaseNotes></PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/Kento-Hanzawa/CyclicRedundancyChecks-CSharp</PackageProjectUrl>
   </PropertyGroup>
 
