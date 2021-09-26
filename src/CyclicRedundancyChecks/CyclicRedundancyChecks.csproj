@@ -59,10 +59,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>CRC.RegisterAlgorithm.cs</LastGenOutput>
     </None>
-    <None Include="..\LICENSE">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
   </ItemGroup>
 
 </Project>
