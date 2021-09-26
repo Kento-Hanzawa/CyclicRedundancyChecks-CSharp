@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CyclicRedundancyChecks\CyclicRedundancyChecks.csproj" />
+    <ProjectReference Include="..\..\src\CyclicRedundancyChecks\CyclicRedundancyChecks.csproj" />
   </ItemGroup>
 
 </Project>
