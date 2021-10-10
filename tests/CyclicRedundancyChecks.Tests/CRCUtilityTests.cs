@@ -1,6 +1,4 @@
-﻿using System;
-using System.Text;
-using CyclicRedundancyChecks.Internal;
+﻿using CyclicRedundancyChecks.Internal;
 using Xunit;
 
 namespace CyclicRedundancyChecks.Tests
