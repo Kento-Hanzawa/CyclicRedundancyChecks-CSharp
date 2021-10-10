@@ -1,8 +1,8 @@
-﻿using BenchmarkDotNet.Jobs;
-using BenchmarkDotNet.Configs;
+﻿using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Diagnosers;
-using BenchmarkDotNet.Exporters;
 using BenchmarkDotNet.Environments;
+using BenchmarkDotNet.Exporters;
+using BenchmarkDotNet.Jobs;
 
 namespace CyclicRedundancyChecks.Benchmark
 {
