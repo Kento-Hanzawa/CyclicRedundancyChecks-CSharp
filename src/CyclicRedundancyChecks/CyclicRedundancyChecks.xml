@@ -1064,7 +1064,7 @@
             計算の最後にビット順反転をするかどうか。
             </summary>
         </member>
-        <member name="P:CyclicRedundancyChecks.CRC16.IsBigEndianResult">
+        <member name="P:CyclicRedundancyChecks.CRC16.IsBigEndian">
             <summary>
             計算結果のCRC値をビッグエンディアン順に <see cref="T:System.Byte"/> 配列に格納するかどうか。
             </summary>
@@ -1125,7 +1125,7 @@
             計算の最後にビット順反転をするかどうか。
             </summary>
         </member>
-        <member name="P:CyclicRedundancyChecks.CRC32.IsBigEndianResult">
+        <member name="P:CyclicRedundancyChecks.CRC32.IsBigEndian">
             <summary>
             計算結果のCRC値をビッグエンディアン順に <see cref="T:System.Byte"/> 配列に格納するかどうか。
             </summary>
@@ -1186,7 +1186,7 @@
             計算の最後にビット順反転をするかどうか。
             </summary>
         </member>
-        <member name="P:CyclicRedundancyChecks.CRC64.IsBigEndianResult">
+        <member name="P:CyclicRedundancyChecks.CRC64.IsBigEndian">
             <summary>
             計算結果のCRC値をビッグエンディアン順に <see cref="T:System.Byte"/> 配列に格納するかどうか。
             </summary>
@@ -1247,7 +1247,7 @@
             計算の最後にビット順反転をするかどうか。
             </summary>
         </member>
-        <member name="P:CyclicRedundancyChecks.CRC8.IsBigEndianResult">
+        <member name="P:CyclicRedundancyChecks.CRC8.IsBigEndian">
             <summary>
             計算結果のCRC値をビッグエンディアン順に <see cref="T:System.Byte"/> 配列に格納するかどうか。
             </summary>
@@ -1308,7 +1308,7 @@
             計算の最後にビット順反転をするかどうか。
             </summary>
         </member>
-        <member name="P:CyclicRedundancyChecks.CRCAny.IsBigEndianResult">
+        <member name="P:CyclicRedundancyChecks.CRCAny.IsBigEndian">
             <summary>
             計算結果のCRC値をビッグエンディアン順に <see cref="T:System.Byte"/> 配列に格納するかどうか。
             </summary>
