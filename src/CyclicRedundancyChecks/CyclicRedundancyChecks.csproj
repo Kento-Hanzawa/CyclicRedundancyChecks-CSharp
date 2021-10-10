@@ -28,11 +28,6 @@
 
   <ItemGroup>
     <None Include="..\..\LICENSE" Link="LICENSE" />
-    <None Include="Internal\HashProvider - コピー.LookupTableFill.cs">
-      <DependentUpon>CRCUtility.LookupTableFill.cs</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </None>
     <None Include="Internal\CRCUtility.LookupTableFill.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
