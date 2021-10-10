@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BenchmarkDotNet.Attributes;
-using CyclicRedundancyChecks.Catalogs;
 
 namespace CyclicRedundancyChecks.Benchmark.Benchmarks
 {
@@ -31,7 +30,7 @@ namespace CyclicRedundancyChecks.Benchmark.Benchmarks
         public byte[] CRC_8_SMBUS_Small()
         {
             // 0x07, 0x00, 0x00, false, false
-            using (var algorithm = new CRC_8_SMBUS())
+            using (var algorithm = CRC.Create(Catalog.CRC8_SMBUS))
             {
                 return algorithm.ComputeHash(smallBytes);
             }
@@ -41,7 +40,7 @@ namespace CyclicRedundancyChecks.Benchmark.Benchmarks
         public byte[] CRC_8_SMBUS_Big()
         {
             // 0x07, 0x00, 0x00, false, false
-            using (var algorithm = new CRC_8_SMBUS())
+            using (var algorithm = CRC.Create(Catalog.CRC8_SMBUS))
             {
                 return algorithm.ComputeHash(bigBytes);
             }
@@ -51,7 +50,7 @@ namespace CyclicRedundancyChecks.Benchmark.Benchmarks
         public byte[] CRC_8_SMBUS_VSmall()
         {
             // 0x07, 0x00, 0x00, false, false
-            using (var algorithm = new CRC_8_SMBUS())
+            using (var algorithm = CRC.Create(Catalog.CRC8_SMBUS))
             {
                 return algorithm.ComputeHash(verySmallBytes);
             }
@@ -60,7 +59,7 @@ namespace CyclicRedundancyChecks.Benchmark.Benchmarks
         [Benchmark]
         public byte[] CRC_8_SMBUS_CRCUInt16_Small()
         {
-            using (var algorithm = new UnderlyingTypes.CRCUInt16(8, 0x07, 0x00, 0x00, false, false))
+            using (var algorithm = new CRC16(0x07, 0x00, 0x00, false, false, 8))
             {
                 return algorithm.ComputeHash(smallBytes);
             }
@@ -69,7 +68,7 @@ namespace CyclicRedundancyChecks.Benchmark.Benchmarks
         [Benchmark]
         public byte[] CRC_8_SMBUS_CRCUInt16_Big()
         {
-            using (var algorithm = new UnderlyingTypes.CRCUInt16(8, 0x07, 0x00, 0x00, false, false))
+            using (var algorithm = new CRC16(0x07, 0x00, 0x00, false, false, 8))
             {
                 return algorithm.ComputeHash(bigBytes);
             }
@@ -78,7 +77,7 @@ namespace CyclicRedundancyChecks.Benchmark.Benchmarks
         [Benchmark]
         public byte[] CRC_8_SMBUS_CRCUInt16_VSmall()
         {
-            using (var algorithm = new UnderlyingTypes.CRCUInt16(8, 0x07, 0x00, 0x00, false, false))
+            using (var algorithm = new CRC16(0x07, 0x00, 0x00, false, false, 8))
             {
                 return algorithm.ComputeHash(verySmallBytes);
             }
@@ -87,7 +86,7 @@ namespace CyclicRedundancyChecks.Benchmark.Benchmarks
         [Benchmark]
         public byte[] CRC_8_SMBUS_CRCUInt32_Small()
         {
-            using (var algorithm = new UnderlyingTypes.CRCUInt32(8, 0x07, 0x00, 0x00, false, false))
+            using (var algorithm = new CRC32(0x07, 0x00, 0x00, false, false, 8))
             {
                 return algorithm.ComputeHash(smallBytes);
             }
@@ -96,7 +95,7 @@ namespace CyclicRedundancyChecks.Benchmark.Benchmarks
         [Benchmark]
         public byte[] CRC_8_SMBUS_CRCUInt32_Big()
         {
-            using (var algorithm = new UnderlyingTypes.CRCUInt32(8, 0x07, 0x00, 0x00, false, false))
+            using (var algorithm = new CRC32(0x07, 0x00, 0x00, false, false, 8))
             {
                 return algorithm.ComputeHash(bigBytes);
             }
@@ -105,7 +104,7 @@ namespace CyclicRedundancyChecks.Benchmark.Benchmarks
         [Benchmark]
         public byte[] CRC_8_SMBUS_CRCUInt32_VSmall()
         {
-            using (var algorithm = new UnderlyingTypes.CRCUInt32(8, 0x07, 0x00, 0x00, false, false))
+            using (var algorithm = new CRC32(0x07, 0x00, 0x00, false, false, 8))
             {
                 return algorithm.ComputeHash(verySmallBytes);
             }
@@ -114,7 +113,7 @@ namespace CyclicRedundancyChecks.Benchmark.Benchmarks
         [Benchmark]
         public byte[] CRC_8_SMBUS_CRCUInt64_Small()
         {
-            using (var algorithm = new UnderlyingTypes.CRCUInt64(8, 0x07, 0x00, 0x00, false, false))
+            using (var algorithm = new CRC64(0x07, 0x00, 0x00, false, false, 8))
             {
                 return algorithm.ComputeHash(smallBytes);
             }
@@ -123,7 +122,7 @@ namespace CyclicRedundancyChecks.Benchmark.Benchmarks
         [Benchmark]
         public byte[] CRC_8_SMBUS_CRCUInt64_Big()
         {
-            using (var algorithm = new UnderlyingTypes.CRCUInt64(8, 0x07, 0x00, 0x00, false, false))
+            using (var algorithm = new CRC64(0x07, 0x00, 0x00, false, false, 8))
             {
                 return algorithm.ComputeHash(bigBytes);
             }
@@ -132,7 +131,7 @@ namespace CyclicRedundancyChecks.Benchmark.Benchmarks
         [Benchmark]
         public byte[] CRC_8_SMBUS_CRCUInt64_VSmall()
         {
-            using (var algorithm = new UnderlyingTypes.CRCUInt64(8, 0x07, 0x00, 0x00, false, false))
+            using (var algorithm = new CRC64(0x07, 0x00, 0x00, false, false, 8))
             {
                 return algorithm.ComputeHash(verySmallBytes);
             }

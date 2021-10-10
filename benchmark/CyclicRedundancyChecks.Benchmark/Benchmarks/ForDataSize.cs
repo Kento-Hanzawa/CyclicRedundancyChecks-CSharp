@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BenchmarkDotNet.Attributes;
-using CyclicRedundancyChecks.Catalogs;
 
 namespace CyclicRedundancyChecks.Benchmark.Benchmarks
 {
@@ -31,7 +30,7 @@ namespace CyclicRedundancyChecks.Benchmark.Benchmarks
         public byte[] CRC_8_SMBUS_Small()
         {
             // 0x07, 0x00, 0x00, false, false
-            using (var algorithm = new CRC_8_SMBUS(false))
+            using (var algorithm = CRC.Create(Catalog.CRC8_SMBUS, false, false))
             {
                 return algorithm.ComputeHash(smallBytes);
             }
@@ -41,7 +40,7 @@ namespace CyclicRedundancyChecks.Benchmark.Benchmarks
         public byte[] CRC_8_SMBUS_Big()
         {
             // 0x07, 0x00, 0x00, false, false
-            using (var algorithm = new CRC_8_SMBUS(false))
+            using (var algorithm = CRC.Create(Catalog.CRC8_SMBUS, false, false))
             {
                 return algorithm.ComputeHash(bigBytes);
             }
@@ -51,7 +50,7 @@ namespace CyclicRedundancyChecks.Benchmark.Benchmarks
         public byte[] CRC_8_SMBUS_VSmall()
         {
             // 0x07, 0x00, 0x00, false, false
-            using (var algorithm = new CRC_8_SMBUS(false))
+            using (var algorithm = CRC.Create(Catalog.CRC8_SMBUS, false, false))
             {
                 return algorithm.ComputeHash(verySmallBytes);
             }
@@ -60,7 +59,7 @@ namespace CyclicRedundancyChecks.Benchmark.Benchmarks
         [Benchmark]
         public byte[] CRC_8_SMBUS_Table_Small()
         {
-            using (var algorithm = new CRC_8_SMBUS(true))
+            using (var algorithm = CRC.Create(Catalog.CRC8_SMBUS, false, true))
             {
                 return algorithm.ComputeHash(smallBytes);
             }
@@ -69,7 +68,7 @@ namespace CyclicRedundancyChecks.Benchmark.Benchmarks
         [Benchmark]
         public byte[] CRC_8_SMBUS_Table_Big()
         {
-            using (var algorithm = new CRC_8_SMBUS(true))
+            using (var algorithm = CRC.Create(Catalog.CRC8_SMBUS, false, true))
             {
                 return algorithm.ComputeHash(bigBytes);
             }
@@ -78,7 +77,7 @@ namespace CyclicRedundancyChecks.Benchmark.Benchmarks
         [Benchmark]
         public byte[] CRC_8_SMBUS_Table_VSmall()
         {
-            using (var algorithm = new CRC_8_SMBUS(true))
+            using (var algorithm = CRC.Create(Catalog.CRC8_SMBUS, false, true))
             {
                 return algorithm.ComputeHash(verySmallBytes);
             }

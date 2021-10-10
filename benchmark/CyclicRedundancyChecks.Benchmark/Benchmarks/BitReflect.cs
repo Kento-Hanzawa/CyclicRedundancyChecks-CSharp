@@ -6,6 +6,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using BenchmarkDotNet.Attributes;
+using CyclicRedundancyChecks.Internal;
 
 namespace CyclicRedundancyChecks.Benchmark.Benchmarks
 {
