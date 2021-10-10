@@ -8,15 +8,41 @@
     <RepositoryUrl>https://github.com/Kento-Hanzawa/CyclicRedundancyChecks-CSharp.git</RepositoryUrl>
     <PackageReleaseNotes></PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/Kento-Hanzawa/CyclicRedundancyChecks-CSharp</PackageProjectUrl>
+    <Authors>K.Hanzawa</Authors>
+    <Description>CRC (Cyclic Redundancy Check) implementations for .NET</Description>
+    <Company />
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
-    <DocumentationFile>D:\Home\GitHub\Repositories\CyclicRedundancyChecks\CyclicRedundancyChecks\CyclicRedundancyChecks.xml</DocumentationFile>
+    <DocumentationFile></DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>D:\Home\Git\Repos\CyclicRedundancyChecks\src\CyclicRedundancyChecks\CyclicRedundancyChecks.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Internal\HashProvider - コピー.LookupTableFill.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="..\..\LICENSE" Link="LICENSE" />
+    <None Include="Internal\HashProvider - コピー.LookupTableFill.cs">
+      <DependentUpon>CRCUtility.LookupTableFill.cs</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </None>
+    <None Include="Internal\CRCUtility.LookupTableFill.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CRCUtility.LookupTableFill.tt</DependentUpon>
+    </None>
+    <None Include="Internal\CRCUtility.RemainderByPolynomial.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CRCUtility.RemainderByPolynomial.tt</DependentUpon>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
@@ -24,44 +50,49 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="CRC_Catalogs.cs">
+    <Compile Update="Catalog.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>CRC_Catalogs.tt</DependentUpon>
+      <DependentUpon>Catalog.tt</DependentUpon>
     </Compile>
-    <Compile Update="CRC_Bits.cs">
+    <Compile Update="Internal\CRCUtility.AppendData.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>CRC_Bits.tt</DependentUpon>
+      <DependentUpon>CRCUtility.AppendData.tt</DependentUpon>
     </Compile>
-    <Compile Update="CRC_UnderlyingTypes.cs">
+    <Compile Update="Internal\CRCUtility.LookupTableFill.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>CRC_UnderlyingTypes.tt</DependentUpon>
+      <DependentUpon>CRCUtility.LookupTableFill.tt</DependentUpon>
     </Compile>
-    <Compile Update="CRC.RegisterAlgorithm.cs">
+    <Compile Update="Internal\CRCUtility.RemainderByPolynomial.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>CRC.RegisterAlgorithm.tt</DependentUpon>
+      <DependentUpon>CRCUtility.RemainderByPolynomial.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Internal\HashProvider.RemainderByPolynomial.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>HashProvider.RemainderByPolynomial.tt</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="CRC_Catalogs.tt">
+    <None Update="Catalog.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CRC_Catalogs.cs</LastGenOutput>
+      <LastGenOutput>Catalog.cs</LastGenOutput>
     </None>
-    <None Update="CRC_Bits.tt">
+    <None Update="Internal\CRCUtility.AppendData.tt">
+      <LastGenOutput>CRCUtility.AppendData.cs</LastGenOutput>
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CRC_Bits.cs</LastGenOutput>
     </None>
-    <None Update="CRC_UnderlyingTypes.tt">
+    <None Update="Internal\CRCUtility.LookupTableFill.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CRC_UnderlyingTypes.cs</LastGenOutput>
+      <LastGenOutput>CRCUtility.LookupTableFill.cs</LastGenOutput>
     </None>
-    <None Update="CRC.RegisterAlgorithm.tt">
+    <None Update="Internal\CRCUtility.RemainderByPolynomial.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CRC.RegisterAlgorithm.cs</LastGenOutput>
+      <LastGenOutput>CRCUtility.RemainderByPolynomial.cs</LastGenOutput>
     </None>
   </ItemGroup>
 
