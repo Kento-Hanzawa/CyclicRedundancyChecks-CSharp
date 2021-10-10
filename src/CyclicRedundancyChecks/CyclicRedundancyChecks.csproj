@@ -23,19 +23,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-
-  <ItemGroup>
     <None Include="..\..\LICENSE" Link="LICENSE" />
-    <None Include="Internal\CRCUtility.LookupTableFill.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>CRCUtility.LookupTableFill.tt</DependentUpon>
-    </None>
-    <None Include="Internal\CRCUtility.RemainderByPolynomial.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>CRCUtility.RemainderByPolynomial.tt</DependentUpon>
-    </None>
   </ItemGroup>
 
   <ItemGroup>
@@ -63,10 +51,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>CRCUtility.RemainderByPolynomial.tt</DependentUpon>
     </Compile>
-    <Compile Update="Internal\HashProvider.RemainderByPolynomial.cs">
+    <Compile Update="Internal\CRCUtility.RemainderByPolynomial.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>HashProvider.RemainderByPolynomial.tt</DependentUpon>
+      <DependentUpon>CRCUtility.RemainderByPolynomial.tt</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -76,8 +64,8 @@
       <LastGenOutput>Catalog.cs</LastGenOutput>
     </None>
     <None Update="Internal\CRCUtility.AppendData.tt">
-      <LastGenOutput>CRCUtility.AppendData.cs</LastGenOutput>
       <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CRCUtility.AppendData.cs</LastGenOutput>
     </None>
     <None Update="Internal\CRCUtility.LookupTableFill.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
