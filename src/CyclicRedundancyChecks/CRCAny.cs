@@ -48,7 +48,7 @@ namespace CyclicRedundancyChecks
         /// <summary>
         /// 計算結果のCRC値をビッグエンディアン順に <see cref="byte"/> 配列に格納するかどうか。
         /// </summary>
-        public bool IsBigEndianResult { get; }
+        public bool IsBigEndian { get; }
 
         /// <summary>
         /// ルックアップテーブルを使用した計算をするかどうか。
@@ -98,7 +98,7 @@ namespace CyclicRedundancyChecks
             ReflectInput = reflectInput;
             ReflectOutput = reflectOutput;
 
-            IsBigEndianResult = isBigEndian;
+            IsBigEndian = isBigEndian;
             UseLookupTable = useLookupTable;
 
             Initialize();
@@ -150,7 +150,7 @@ namespace CyclicRedundancyChecks
             _result ^= FinalXorValue;
             _result &= BitMask;
 
-            return _result.TryWriteBytes(destination, out bytesWritten, true, IsBigEndianResult);
+            return _result.TryWriteBytes(destination, out bytesWritten, true, IsBigEndian);
         }
 
         protected sealed override void Dispose(bool disposing)

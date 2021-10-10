@@ -48,7 +48,7 @@ namespace CyclicRedundancyChecks
         /// <summary>
         /// 計算結果のCRC値をビッグエンディアン順に <see cref="byte"/> 配列に格納するかどうか。
         /// </summary>
-        public bool IsBigEndianResult { get; }
+        public bool IsBigEndian { get; }
 
         /// <summary>
         /// ルックアップテーブルを使用した計算をするかどうか。
@@ -100,7 +100,7 @@ namespace CyclicRedundancyChecks
             ReflectInput = reflectInput;
             ReflectOutput = reflectOutput;
 
-            IsBigEndianResult = isBigEndian;
+            IsBigEndian = isBigEndian;
             UseLookupTable = useLookupTable;
 
             Initialize();
@@ -154,7 +154,7 @@ namespace CyclicRedundancyChecks
 
             for (var i = 0; i < BitWidthInBytes; i++)
             {
-                if (IsBigEndianResult)
+                if (IsBigEndian)
                 {
                     destination[i] = (byte)(_result >> ((BitWidthInBytes * 8) - ((i * 8) + 8)));
                 }
