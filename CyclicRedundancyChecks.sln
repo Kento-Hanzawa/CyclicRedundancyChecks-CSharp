@@ -3,19 +3,36 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31321.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CyclicRedundancyChecks", "src\CyclicRedundancyChecks\CyclicRedundancyChecks.csproj", "{788B71ED-414B-4D2D-9DC0-6D6C5EB9EAF3}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CyclicRedundancyChecks.Tests", "tests\CyclicRedundancyChecks.Tests\CyclicRedundancyChecks.Tests.csproj", "{DF12F5D5-1FDE-42E2-89B8-F98BB3AF4EAE}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A001CF21-A284-40EA-86D0-DD4F9C87BBE2}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		.gitignore = .gitignore
 		AlgorithmCatalog.xml = AlgorithmCatalog.xml
+		azure-pipelines.yml = azure-pipelines.yml
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CyclicRedundancyChecks.Benchmark", "benchmark\CyclicRedundancyChecks.Benchmark\CyclicRedundancyChecks.Benchmark.csproj", "{066F803B-AF21-4A40-A050-0C2361F31482}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BD7E8DD6-4380-456E-8245-E7FC65E35467}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{ABED2D92-224F-4372-8772-CB511541D31D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "benchmark", "benchmark", "{6C4577F6-1E5F-46B8-BD58-D4DF04828780}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sandbox", "sandbox", "{331F9C6B-0191-4E4B-BA90-9D197CDE5BEF}"
+	ProjectSection(SolutionItems) = preProject
+		sandbox\CyclicRedundancyChecks.Generator\CyclicRedundancyChecks.Generator.csproj = sandbox\CyclicRedundancyChecks.Generator\CyclicRedundancyChecks.Generator.csproj
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CyclicRedundancyChecks.Benchmark", "benchmark\CyclicRedundancyChecks.Benchmark\CyclicRedundancyChecks.Benchmark.csproj", "{E470B64E-7302-42F9-A1F5-2E0572521750}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CyclicRedundancyChecks.Tests", "tests\CyclicRedundancyChecks.Tests\CyclicRedundancyChecks.Tests.csproj", "{93B4CAC4-864A-4F06-AA7C-16D55BC3CE5E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CyclicRedundancyChecks", "src\CyclicRedundancyChecks\CyclicRedundancyChecks.csproj", "{6CF024D5-24EF-4391-91B1-69B478475D23}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CyclicRedundancyChecks.Generator.ConsoleApp", "sandbox\CyclicRedundancyChecks.Generator.ConsoleApp\CyclicRedundancyChecks.Generator.ConsoleApp.csproj", "{3D5DF7E7-9050-4C7B-A3A7-546FF79FD239}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CyclicRedundancyChecks.Run", "sandbox\CyclicRedundancyChecks.Run\CyclicRedundancyChecks.Run.csproj", "{049E95F7-5C5B-410B-9C5A-6CCFE5378B83}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,21 +40,40 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{788B71ED-414B-4D2D-9DC0-6D6C5EB9EAF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{788B71ED-414B-4D2D-9DC0-6D6C5EB9EAF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{788B71ED-414B-4D2D-9DC0-6D6C5EB9EAF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{788B71ED-414B-4D2D-9DC0-6D6C5EB9EAF3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DF12F5D5-1FDE-42E2-89B8-F98BB3AF4EAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DF12F5D5-1FDE-42E2-89B8-F98BB3AF4EAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DF12F5D5-1FDE-42E2-89B8-F98BB3AF4EAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DF12F5D5-1FDE-42E2-89B8-F98BB3AF4EAE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{066F803B-AF21-4A40-A050-0C2361F31482}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{066F803B-AF21-4A40-A050-0C2361F31482}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{066F803B-AF21-4A40-A050-0C2361F31482}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{066F803B-AF21-4A40-A050-0C2361F31482}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E470B64E-7302-42F9-A1F5-2E0572521750}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E470B64E-7302-42F9-A1F5-2E0572521750}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E470B64E-7302-42F9-A1F5-2E0572521750}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E470B64E-7302-42F9-A1F5-2E0572521750}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93B4CAC4-864A-4F06-AA7C-16D55BC3CE5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93B4CAC4-864A-4F06-AA7C-16D55BC3CE5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93B4CAC4-864A-4F06-AA7C-16D55BC3CE5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93B4CAC4-864A-4F06-AA7C-16D55BC3CE5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CF024D5-24EF-4391-91B1-69B478475D23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CF024D5-24EF-4391-91B1-69B478475D23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CF024D5-24EF-4391-91B1-69B478475D23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CF024D5-24EF-4391-91B1-69B478475D23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D5DF7E7-9050-4C7B-A3A7-546FF79FD239}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D5DF7E7-9050-4C7B-A3A7-546FF79FD239}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D5DF7E7-9050-4C7B-A3A7-546FF79FD239}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D5DF7E7-9050-4C7B-A3A7-546FF79FD239}.Release|Any CPU.Build.0 = Release|Any CPU
+		{049E95F7-5C5B-410B-9C5A-6CCFE5378B83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{049E95F7-5C5B-410B-9C5A-6CCFE5378B83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{049E95F7-5C5B-410B-9C5A-6CCFE5378B83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{049E95F7-5C5B-410B-9C5A-6CCFE5378B83}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BD7E8DD6-4380-456E-8245-E7FC65E35467} = {A001CF21-A284-40EA-86D0-DD4F9C87BBE2}
+		{ABED2D92-224F-4372-8772-CB511541D31D} = {A001CF21-A284-40EA-86D0-DD4F9C87BBE2}
+		{6C4577F6-1E5F-46B8-BD58-D4DF04828780} = {A001CF21-A284-40EA-86D0-DD4F9C87BBE2}
+		{331F9C6B-0191-4E4B-BA90-9D197CDE5BEF} = {A001CF21-A284-40EA-86D0-DD4F9C87BBE2}
+		{E470B64E-7302-42F9-A1F5-2E0572521750} = {6C4577F6-1E5F-46B8-BD58-D4DF04828780}
+		{93B4CAC4-864A-4F06-AA7C-16D55BC3CE5E} = {ABED2D92-224F-4372-8772-CB511541D31D}
+		{6CF024D5-24EF-4391-91B1-69B478475D23} = {BD7E8DD6-4380-456E-8245-E7FC65E35467}
+		{3D5DF7E7-9050-4C7B-A3A7-546FF79FD239} = {331F9C6B-0191-4E4B-BA90-9D197CDE5BEF}
+		{049E95F7-5C5B-410B-9C5A-6CCFE5378B83} = {331F9C6B-0191-4E4B-BA90-9D197CDE5BEF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1E331D4C-98F6-45B4-AA46-E25A31861715}

@@ -8,8 +8,7 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Collections" #>
 <#@ import namespace="System.Collections.Generic" #>
-<#@ include file="..\CyclicRedundancyChecks\T4Includes\Header.ttinclude" #>
-<#@ include file="..\CyclicRedundancyChecks\T4Includes\AlgorithmCatalog.ttinclude" #>
+<#@ include file="..\..\src\CyclicRedundancyChecks\AlgorithmCatalog.ttinclude" #>
 using System;
 using System.Buffers;
 using System.Globalization;
@@ -17,7 +16,7 @@ using System.IO;
 using System.Numerics;
 using System.Text;
 using Xunit;
-using CyclicRedundancyChecks.Catalogs;
+using CyclicRedundancyChecks;
 
 namespace CyclicRedundancyChecks.Tests
 {
@@ -32,7 +31,7 @@ namespace CyclicRedundancyChecks.Tests
         public void <#= definition.ClassName #>_NotTable_ComputeHash()
         {
             var expected = "0x" + BigInteger.Parse("0<#= definition.CheckValueOnly #>", NumberStyles.AllowHexSpecifier).ToString("x<#= (int.Parse(definition.Width) / 4) + ((int.Parse(definition.Width) % 4 == 0 ? 0 : 1)) #>");
-            using (var algorithm = new <#= definition.ClassName #>(isLookupTable: false))
+            using (var algorithm = CRC.Create(Catalog.<#= definition.PropertyName #>, false, false))
             {
                 var hash = algorithm.ComputeHash(TestData);
                 var actual = "0x" + new BigInteger(hash, isUnsigned: true).ToString("x<#= (int.Parse(definition.Width) / 4) + ((int.Parse(definition.Width) % 4 == 0 ? 0 : 1)) #>");
@@ -44,7 +43,7 @@ namespace CyclicRedundancyChecks.Tests
         public void <#= definition.ClassName #>_UseTable_ComputeHash()
         {
             var expected = "0x" + BigInteger.Parse("0<#= definition.CheckValueOnly #>", NumberStyles.AllowHexSpecifier).ToString("x<#= (int.Parse(definition.Width) / 4) + ((int.Parse(definition.Width) % 4 == 0 ? 0 : 1)) #>");
-            using (var algorithm = new <#= definition.ClassName #>(isLookupTable: true))
+            using (var algorithm = CRC.Create(Catalog.<#= definition.PropertyName #>, false, true))
             {
                 var hash = algorithm.ComputeHash(TestData);
                 var actual = "0x" + new BigInteger(hash, isUnsigned: true).ToString("x<#= (int.Parse(definition.Width) / 4) + ((int.Parse(definition.Width) % 4 == 0 ? 0 : 1)) #>");
@@ -63,7 +62,7 @@ namespace CyclicRedundancyChecks.Tests
         public void <#= definition.ClassName #>_NotTable_TransformBlock()
         {
             var expected = "0x" + BigInteger.Parse("0<#= definition.CheckValueOnly #>", NumberStyles.AllowHexSpecifier).ToString("x<#= (int.Parse(definition.Width) / 4) + ((int.Parse(definition.Width) % 4 == 0 ? 0 : 1)) #>");
-            using (var algorithm = new <#= definition.ClassName #>(isLookupTable: false))
+            using (var algorithm = CRC.Create(Catalog.<#= definition.PropertyName #>, false, false))
             using (var stream = new MemoryStream(TestData))
             {
                 var buffer = ArrayPool<byte>.Shared.Rent(1);
@@ -90,7 +89,7 @@ namespace CyclicRedundancyChecks.Tests
         public void <#= definition.ClassName #>_UseTable_TransformBlock()
         {
             var expected = "0x" + BigInteger.Parse("0<#= definition.CheckValueOnly #>", NumberStyles.AllowHexSpecifier).ToString("x<#= (int.Parse(definition.Width) / 4) + ((int.Parse(definition.Width) % 4 == 0 ? 0 : 1)) #>");
-            using (var algorithm = new <#= definition.ClassName #>(isLookupTable: true))
+            using (var algorithm = CRC.Create(Catalog.<#= definition.PropertyName #>, false, true))
             using (var stream = new MemoryStream(TestData))
             {
                 var buffer = ArrayPool<byte>.Shared.Rent(1);

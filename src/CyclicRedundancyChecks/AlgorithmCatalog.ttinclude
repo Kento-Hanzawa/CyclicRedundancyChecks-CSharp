@@ -11,7 +11,7 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Xml.Linq" #>
 <#@ import namespace="System.Numerics" #>
-<#  AlgorithmCatalog AlgorithmCatalog = AlgorithmCatalog.ReadXml(System.IO.Path.GetDirectoryName(this.Host.TemplateFile) + @"\..\AlgorithmCatalog.xml"); #>
+<#  AlgorithmCatalog AlgorithmCatalog = AlgorithmCatalog.ReadXml(System.IO.Path.GetDirectoryName(this.Host.TemplateFile) + @"\..\..\AlgorithmCatalog.xml"); #>
 <#+ 
     private sealed class AlgorithmCatalog
     {
@@ -71,6 +71,11 @@
         public string InheritClassName
         {
             get { return "CRC" + Width; }
+        }
+
+        public string PropertyName
+        {
+            get { return Name.Replace("CRC-", "CRC").Replace("-", "_").Replace("/", "_"); }
         }
 
         public AlgorithmDefinition(XElement element)
