@@ -26,7 +26,7 @@ jobs:
     - run: dotnet restore
     - run: dotnet build --configuration Release --no-restore  -p:Version=${{ env.INPUT_TAG }}
     - run: dotnet test  --configuration Release --no-build   
-    - run: dotnet pack "./src/CyclicRedundancyChecks/CyclicRedundancyChecks.csproj" --configuration Release --no-build -p:Version=${{ env.INPUT_TAG }} -o "./publish"
+    - run: dotnet pack "./src/CyclicRedundancyChecks/CyclicRedundancyChecks.csproj" --configuration Release --no-build -p:Version=${{ env.INPUT_TAG }} -p:DocumentationFile=./src/CyclicRedundancyChecks/CyclicRedundancyChecks.xml -o "./publish"
     - uses: actions/upload-artifact@v2
       with:
         name: nuget
